@@ -12,8 +12,8 @@ int	main(int ac, char **av)
 		data.map = &map;
 		get_dimensions(av[1], &data);
 		read_map(av[1], &data);
-		rework_map(&data);
-		print_map(&data);
+		parse_map(&data);
+		// print_map(&data);
 	}
 	// free_grid(&data);
 	// free(data);

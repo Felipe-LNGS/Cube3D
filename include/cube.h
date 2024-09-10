@@ -42,8 +42,8 @@ char			*skip_space(char *line);
 void			stock_info(char *line, t_data *data);
 void			stock_info_bis(char *line, t_data *data);
 int				is_info(char *line);
-void 	check_is_close(t_data *data);
+void			check_is_close(t_data *data);
 void			parse_map(t_data *data);
-void	check_valid_char(t_data *data);
+void			check_valid_char(t_data *data);
 
 #endif
