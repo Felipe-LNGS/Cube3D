@@ -12,7 +12,7 @@ int	main(int ac, char **av)
 		data.map = &map;
 		get_dimensions(av[1], &data);
 		read_map(av[1], &data);
-		data.map->tmp_grid = rework_map(&data);
+		rework_map(&data);
 		print_map(&data);
 	}
 	// free_grid(&data);
