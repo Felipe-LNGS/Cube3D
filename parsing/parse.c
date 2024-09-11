@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 15:57:19 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:27:49 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	check_is_close(t_data *data)
 	x = data->map->start_line;
 	while (x < data->map->nb_lines)
 	{
-		y = -1;
-		while (--y < data->map->width)
+		y = 0;
+		while (y < data->map->width)
 		{
 			if (ft_strchr("0NSEW", map[x][y]))
 			{
@@ -77,6 +77,7 @@ void	check_is_close(t_data *data)
 					exit(1);
 				}
 			}
+			y++;
 		}
 		x++;
 	}
