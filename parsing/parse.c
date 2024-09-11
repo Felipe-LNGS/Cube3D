@@ -25,24 +25,14 @@ void	check_valid_char(t_data *data)
 		y = -1;
 		while (++y < data->map->width)
 		{
-			if ((ft_strchr("01NSEW ", data->map->tmp_grid[x][y]) == NULL))
-			{
-				ft_printf(RED "Invalid character '%c' need to put only '%s'\n\
-					" RESET,
-							data->map->tmp_grid[x][y],
-							"01NSEW ");
-				exit(1);
-				// free_exit + message
-			}
+			ft_printf("%c", data->map->tmp_grid[x][y]);
+			if ((ft_strchr("01NSEW ", data->map->tmp_grid[x][y]) == NULL))	
+				exit_free(data,"Invalid character need to put only 01NSEW");
 			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
 				nb_start++;
 		}
 		if (nb_start > 1)
-		{
-			ft_printf(RED "Error: more than one start position found\n" RESET);
-			exit(1);
-			// free_exit + message
-		}
+			exit_free(data,"Error: more than one start position found.");
 		x++;
 	}
 }
@@ -74,7 +64,7 @@ void	check_is_close(t_data *data)
 						- 1 >= 0 && map[x][y - 1] == ' '))
 				{
 					ft_printf(RED "Map not closed: adjacent to empty space\n" RESET);
-					exit(1);
+					
 				}
 			}
 			y++;
@@ -98,7 +88,6 @@ void	find_start_line(t_data *data)
 			data->map->start_line = i;
 			return ;
 		}
-		
 		i++;
 	}
 	data->map->start_line = data->map->nb_lines;
@@ -110,13 +99,14 @@ void	parse_map(t_data *data)
 	rework_map(data);
 	check_valid_char(data);
 	check_is_close(data);
-	split_rgb(data, data->map->f);
-	split_rgb(data, data->map->c);
+	print_map(data);
+
+	split_rgb(data, data->map->f, 'F');
+	split_rgb(data, data->map->c, 'C');
 	// printf("north[%s]\n", data->map->north_path);
 	// printf("s [%s]\n", data->map->south_path);
 	// printf("e [%s]\n", data->map->east_path);
 	// printf("w [%s]\n", data->map->west_path);
 	// printf("f [%s]\n", data->map->f);
 	// printf("c [%s]\n", data->map->c);
-	// print_map(data);
 }

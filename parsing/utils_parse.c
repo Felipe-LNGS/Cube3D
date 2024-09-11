@@ -31,10 +31,10 @@ void	print_map(t_data *data)
 	int	j;
 
 	i = 0;
-	while (i < data->map->nb_lines)
+	while (i < data->map->height)
 	{
 		j = 0;
-		while (j < data->map->height)
+		while (j  < data->map->width)
 		{
 			ft_printf("%c", data->map->tmp_grid[i][j]);
 			j++;
@@ -51,7 +51,7 @@ char	*skip_space(char *line)
 	return (line);
 }
 
-char	*ft_strducube(const char *s)
+char	*ft_strducube(char *s)
 {
 	char	*dest;
 	int		i;
@@ -69,4 +69,14 @@ char	*ft_strducube(const char *s)
 	dest[i] = '\0';
 	return (dest);
 }
+
+
+int rgb_to_int(int *rgb)
+{
+	int	color;
+
+	color = (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	return (color);
+}
+
 // verifier autour de chaque 0 si il y a autre chose que un 1 c'est carton rouge

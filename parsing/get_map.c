@@ -26,22 +26,18 @@ int	check_format(char *map)
 	return (1);
 }
 
-int	open_file(char *filename)
+static int	open_file(t_data *data, char *filename)
 {
 	int	fd;
 
 	fd = open(filename, __O_DIRECTORY);
 	if (fd > 0)
 	{
-		ft_printf(RED "Error\nU can't open .cub directory\n" RESET);
-		exit(0);
+		 return (exit_free(data, "Error\nTry to read empty map."), 1);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_printf(RED "Error\nFailed to open file.\n" RESET);
-		exit(0);
-	}
+		return (exit_free(data, "Error\nFailed to open file."), 1);
 	return (fd);
 }
 
@@ -51,11 +47,10 @@ int	get_height(char *filename, t_data *data)
 	int		fd;
 	char	*line;
 
-	fd = open_file(filename);
+	fd = open_file(data, filename);
 	line = get_next_line(fd);
 	if (line == NULL)
-		return (ft_printf(RED "Error\nTry to read empty map.\n" RESET),
-			close(fd), exit(0), 0);
+		return (close(fd), exit_free(data, "Error\nTry to read empty map.\n"), 0);
 	while (line)
 	{
 		free(line);
@@ -97,25 +92,24 @@ int	read_map(char *filename, t_data *data)
 	int		i;
 
 	i = 0;
-	fd = open_file(filename);
+	fd = open_file(data ,filename);
 	line = ft_calloc(sizeof(char *), data->map->nb_lines + 1);
 	if (line == NULL)
-		return (close(fd), 0);
+		return ( close(fd), exit_free(data, MERROR),0);
 	data->map->grid = ft_calloc(sizeof(char *), data->map->nb_lines + 1);
 	if (data->map->grid == NULL)
-		return (free(line), close(fd), 0);
+		return ( free(line), close(fd),exit_free(data, MERROR), 0);
 	while (i < data->map->nb_lines)
 	{
 		line[i] = get_next_line(fd);
 		if (line[i])
 			data->map->grid[i] = ft_strdup(line[i]);
 		if (data->map->grid[i] == NULL)
-			return (free(line), close(fd), ft_printf(RED "MALLOC ERROR\n"),
-				exit(0), 0);
+			return (free(line), close(fd), exit_free(data, MERROR), 0);
 		free(line[i]);
 		i++;
 	}
-	return (free(line), close(fd), 1);
+	return (free(line), close(fd), 0);
 }
 
 void rework_map(t_data *data)
@@ -123,42 +117,29 @@ void rework_map(t_data *data)
     char **tmp_grid;
     int x;
     int line_length;
-    int max_width;
-
-    max_width = data->map->width; // Utiliser la largeur stockée dans la structure
-    x = 0; // Commencer à la première ligne
+ 
+    x =  data->map->start_line; 
     tmp_grid = ft_calloc(sizeof(char *), (data->map->height));
     if (!tmp_grid)
-        return;
-
+       	exit_free(data, MERROR);
     while (x < data->map->nb_lines)
     {
-        tmp_grid[x] = ft_calloc(sizeof(char), (max_width + 1)); // +1 pour le caractère nul
+        tmp_grid[x] = ft_calloc(sizeof(char), (data->map->width + 1));
         if (!tmp_grid[x])
-        {
-            free_split(tmp_grid);
-            return;
-        }
-
+			exit_free(data, MERROR);
         line_length = 0;
-        // Copier les caractères jusqu'à la fin de la ligne ou jusqu'à max_width
-        while (data->map->grid[x][line_length] != '\n' && line_length < max_width)
+        while (data->map->grid[x][line_length] != '\n' && line_length < data->map->width)
         {
             tmp_grid[x][line_length] = data->map->grid[x][line_length];
             line_length++;
         }
-
-        // Remplir le reste de la ligne avec des espaces
-        while (line_length < max_width)
+        while (line_length < data->map->width)
         {
             tmp_grid[x][line_length] = ' ';
             line_length++;
         }
-
-        // Ajouter le caractère nul à la fin de la chaîne
-        tmp_grid[x][line_length] = '\0';
-
-        x++;
+        // tmp_grid[x][line_length] = '\0';
+		x++;
     }
     data->map->tmp_grid = tmp_grid;
 }

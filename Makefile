@@ -20,7 +20,7 @@ C_FILE		 = 		main.c								\
 					parsing/get_map.c					\
 					parsing/get_info.c					\
 					parsing/parse.c						\
-
+					free/exit_and_free.c				\
 
 OBJS        =   $(C_FILE:.c=.o)
 DEPS		=	$(OBJS:.o=.d)

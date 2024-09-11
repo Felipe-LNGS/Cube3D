@@ -21,24 +21,22 @@ void	stock_info_bis(char *line, t_data *data)
 	{
 		space_skiped = skip_space(space_skiped + 2);
 		data->map->f = ft_strducube(space_skiped);
-		data->map->is_f = 1;
 		if (!data->map->f)
-			exit(1);
+			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "C ", 2))
 	{
 		space_skiped = skip_space(space_skiped + 2);
 		data->map->c = ft_strducube(space_skiped);
-		data->map->is_c = 1;
 		if (!data->map->c)
-			exit(1);
+			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
 		data->map->east_path = ft_strducube(space_skiped);
 		if (!data->map->east_path)
-			exit(1);
+			exit_free(data, MERROR);
 	}
 }
 
@@ -52,21 +50,21 @@ void	stock_info(char *line, t_data *data)
 		space_skiped = skip_space(space_skiped + 3);
 		data->map->north_path = ft_strducube(space_skiped);
 		if (!data->map->north_path)
-			exit(1);
+			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
 		data->map->south_path = ft_strducube(space_skiped);
 		if (!data->map->south_path)
-			exit(1);
+			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
 		data->map->west_path = ft_strducube(space_skiped);
 		if (!data->map->west_path)
-			exit(1);
+			exit_free(data, MERROR);
 	}
 	stock_info_bis(line, data);
 }
@@ -105,7 +103,7 @@ static int	check_value(char *str)
 	}
 	return (0);
 }
-void	split_rgb(t_data *data, char *rgb)
+void	split_rgb(t_data *data, char *rgb, char who)
 {
 	char	**splited;
 	int		i;
@@ -115,12 +113,15 @@ void	split_rgb(t_data *data, char *rgb)
 	while (i < 3)
 	{
 		if (check_value(splited[i]) == 1)
-		{
-			printf(RED"Invalid rgb code\n"RESET);
-			exit(1);
-		}
-		data->map->f_tab[i] = ft_atoi(splited[i]);
-		printf("data->map->f_tab[%d]\n", data->map->f_tab[i]);
+			exit_free(data, "Invalid rgb code");
+		if (who =='F')
+			data->map->f_tab[i] = ft_atoi(splited[i]);
+		if (who =='C')
+			data->map->c_tab[i] = ft_atoi(splited[i]);
 		i++;
 	}
+	if (who =='F')
+		data->map->c_color = rgb_to_int(data->map->f_tab);
+	if (who =='C')
+		data->map->f_color = rgb_to_int(data->map->c_tab);
 }
