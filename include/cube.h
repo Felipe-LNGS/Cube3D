@@ -13,8 +13,8 @@ typedef struct s_map
 	char		*east_path;
 	char		*west_path;
 	int			start_line;
-	int			f;
-	int			c;
+	char		*f;
+	char		*c;
 	int			nb_lines;
 	int			width;
 	int			height;

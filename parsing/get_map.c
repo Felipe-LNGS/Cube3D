@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 10:40:12 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:41:05 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ int	read_map(char *filename, t_data *data)
 
 	i = 0;
 	fd = open_file(filename);
-	line = malloc(sizeof(char *) * data->map->nb_lines);
+	line = ft_calloc(sizeof(char *), data->map->nb_lines + 1);
 	if (line == NULL)
 		return (close(fd), 0);
-	data->map->grid = malloc(sizeof(char *) * data->map->nb_lines);
+	data->map->grid = ft_calloc(sizeof(char *), data->map->nb_lines + 1);
 	if (data->map->grid == NULL)
 		return (free(line), close(fd), 0);
 	while (i < data->map->nb_lines)
@@ -110,7 +110,7 @@ int	read_map(char *filename, t_data *data)
 		if (line[i])
 			data->map->grid[i] = ft_strdup(line[i]);
 		if (data->map->grid[i] == NULL)
-			return (free(line), close(fd), printf(RED "MALLOC ERROR\n"),
+			return (free(line), close(fd), ft_printf(RED "MALLOC ERROR\n"),
 				exit(0), 0);
 		free(line[i]);
 		i++;
@@ -118,36 +118,50 @@ int	read_map(char *filename, t_data *data)
 	return (free(line), close(fd), 1);
 }
 
-void	rework_map(t_data *data)
+void rework_map(t_data *data)
 {
-	char	**tmp_grid;
-	int		x;
-	int		y;
-	int		line_length;
+    char **tmp_grid;
+    int x;
+    int line_length;
+    int max_width;
 
-	y = 0;
-	x = data->map->start_line;
-	tmp_grid = ft_calloc(sizeof(char *), (data->map->height + 1));
-	if (!tmp_grid)
-		return ;
-	while (x < data->map->nb_lines)
-	{
-		tmp_grid[y] = malloc(sizeof(char) * (data->map->width + 1));
-		if (!tmp_grid[y])
-		{
-			free_split(tmp_grid);
-			return ;
-		}
-		line_length = 0;
-		while (line_length < data->map->width
-			&& data->map->grid[x][line_length] != '\0')
-		{
-			tmp_grid[y][line_length] = data->map->grid[x][line_length];
-			line_length++;
-		}
-		tmp_grid[y][line_length] = '\0';
-		x++;
-		y++;
-	}
-	data->map->tmp_grid = tmp_grid;
+    max_width = data->map->width; // Utiliser la largeur stockée dans la structure
+    x = 0; // Commencer à la première ligne
+    tmp_grid = ft_calloc(sizeof(char *), (data->map->height));
+    if (!tmp_grid)
+        return;
+
+    while (x < data->map->nb_lines)
+    {
+        tmp_grid[x] = ft_calloc(sizeof(char), (max_width + 1)); // +1 pour le caractère nul
+        if (!tmp_grid[x])
+        {
+            free_split(tmp_grid);
+            return;
+        }
+
+        line_length = 0;
+        // Copier les caractères jusqu'à la fin de la ligne ou jusqu'à max_width
+        while (data->map->grid[x][line_length] != '\n' && line_length < max_width)
+        {
+            tmp_grid[x][line_length] = data->map->grid[x][line_length];
+            line_length++;
+        }
+
+        // Remplir le reste de la ligne avec des espaces
+        while (line_length < max_width)
+        {
+            tmp_grid[x][line_length] = ' ';
+            line_length++;
+        }
+
+        // Ajouter le caractère nul à la fin de la chaîne
+        tmp_grid[x][line_length] = '\0';
+
+        x++;
+    }
+    data->map->tmp_grid = tmp_grid;
 }
+
+
+

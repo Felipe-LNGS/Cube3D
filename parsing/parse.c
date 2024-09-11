@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 10:39:26 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:57:19 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,28 @@
 
 void	check_valid_char(t_data *data)
 {
-	int		x;
-	int		y;
-	char	*valid_char;
-	int		nb_start;
-	char	*start;
+	int	x;
+	int	y;
+	int	nb_start;
 
 	nb_start = 0;
-	valid_char = "01NSEW ";
-	start = "NSEW";
 	x = data->map->start_line;
-	while (x < data->map->height)
+	while (x < data->map->nb_lines)
 	{
 		y = -1;
-		while (y++ < data->map->width)
+		while (++y < data->map->width)
 		{
-			if ((ft_strchr(valid_char, data->map->tmp_grid[x][y]) == 0))
+			if ((ft_strchr("01NSEW ", data->map->tmp_grid[x][y]) == NULL))
 			{
-				ft_printf(RED "Invalid character '%c' need to put only \
-				%s\n" RESET,
+				ft_printf(RED "Invalid character '%c' need to put only '%s'\n\
+					" RESET,
 							data->map->tmp_grid[x][y],
-							valid_char);
+							"01NSEW ");
 				exit(1);
 				// free_exit + message
 			}
-			if ((ft_strchr(start, data->map->tmp_grid[x][y]) == 0))
-				start++;
+			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
+				nb_start++;
 		}
 		if (nb_start > 1)
 		{
@@ -55,32 +51,30 @@ void	check_is_close(t_data *data)
 {
 	int		x;
 	int		y;
-	char	*valid_path;
+	char	**map;
 
-	valid_path = "NSEW ";
+	map = data->map->tmp_grid;
 	x = data->map->start_line;
-	while (x < data->map->height)
+	while (x < data->map->nb_lines)
 	{
 		y = -1;
-		while (y++ < data->map->width)
+		while (--y < data->map->width)
 		{
-			if ((ft_strchr(valid_path, data->map->tmp_grid[x][y]) == 0))
+			if (ft_strchr("0NSEW", map[x][y]))
 			{
-				if (y == 0 || x == 0 || x == data->map->height || y
-					+ 1 == data->map->width)
+				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
+					|| y == data->map->width - 1)
 				{
-					ft_printf(RED "Invalid character  need to put only\n" RESET);
+					ft_printf(RED "Map not closed: character on the edge\n" RESET);
 					exit(1);
-					// free_exit + message
 				}
-				else if (data->map->tmp_grid[x + 1][y] == ' '
-					|| data->map->tmp_grid[x - 1][y] == ' '
-					|| data->map->tmp_grid[x][y + 1] == ' '
-					|| data->map->tmp_grid[x][y - 1] == ' ')
+				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
+						- 1 >= 0 && map[x - 1][y] == ' ') || (y
+						+ 1 < data->map->width && map[x][y + 1] == ' ') || (y
+						- 1 >= 0 && map[x][y - 1] == ' '))
 				{
-					ft_printf(RED "Invalid character  need to put only\n" RESET);
+					ft_printf(RED "Map not closed: adjacent to empty space\n" RESET);
 					exit(1);
-					// free_exit + message
 				}
 			}
 		}
@@ -88,25 +82,41 @@ void	check_is_close(t_data *data)
 	}
 }
 
-void	parse_map(t_data *data)
+void	find_start_line(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->map->grid[i])
 	{
-		if (data->map->grid[i][0] == '\n' && data->map->grid[i][1] == '\0')
-			data->map->start_line++;
-		if (is_info(data->map->grid[i]) == 1)
+		if (is_info(data->map->grid[i]))
+		{
+			i++;
 			stock_info(data->map->grid[i], data);
+			continue ;
+		}
+		if (ft_strchr(data->map->grid[i], '0') || ft_strchr(data->map->grid[i],
+				'1'))
+		{
+			data->map->start_line = i;
+			return ;
+		}
 		i++;
 	}
+	data->map->start_line = data->map->nb_lines;
+}
+void	parse_map(t_data *data)
+{
+	find_start_line(data);
+	// Vérifiez que start_line ne dépasse pas le nombre de lignes
+	// if (data->map->start_line >= data->map->nb_lines) {
+	//     ft_printf(RED "Error: start_line exceeds number of lines.\n" RESET);
+	//     return ;
+	// }
+	// Appel des fonctions pour obtenir la largeur et réorganiser la carte
 	get_width(data);
-printf("max lines%d\n", data->map->nb_lines);
-	printf("max height %d\n", data->map->height);
 	rework_map(data);
-	print_map(data);
-
-	// check_is_close(data);
-	// check_valid_char(data);
+	check_valid_char(data);
+	check_is_close(data);
+	// print_map(data);
 }
