@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 15:02:15 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:55:47 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,22 @@ char	*skip_space(char *line)
 	return (line);
 }
 
+char	*ft_strducube(const char *s)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	dest = malloc(ft_strlen(s) * sizeof(char));
+	if (!dest)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] != '\n')
+			dest[i] = s[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
 // verifier autour de chaque 0 si il y a autre chose que un 1 c'est carton rouge

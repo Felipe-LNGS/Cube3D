@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 16:27:49 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:18:34 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,14 @@ void	find_start_line(t_data *data)
 	while (data->map->grid[i])
 	{
 		if (is_info(data->map->grid[i]))
-		{
-			i++;
 			stock_info(data->map->grid[i], data);
-			continue ;
-		}
-		if (ft_strchr(data->map->grid[i], '0') || ft_strchr(data->map->grid[i],
+		else if (ft_strchr(data->map->grid[i], '0') || ft_strchr(data->map->grid[i],
 				'1'))
 		{
 			data->map->start_line = i;
 			return ;
 		}
+		
 		i++;
 	}
 	data->map->start_line = data->map->nb_lines;
@@ -109,15 +106,17 @@ void	find_start_line(t_data *data)
 void	parse_map(t_data *data)
 {
 	find_start_line(data);
-	// Vérifiez que start_line ne dépasse pas le nombre de lignes
-	// if (data->map->start_line >= data->map->nb_lines) {
-	//     ft_printf(RED "Error: start_line exceeds number of lines.\n" RESET);
-	//     return ;
-	// }
-	// Appel des fonctions pour obtenir la largeur et réorganiser la carte
 	get_width(data);
 	rework_map(data);
 	check_valid_char(data);
 	check_is_close(data);
+	split_rgb(data, data->map->f);
+	split_rgb(data, data->map->c);
+	// printf("north[%s]\n", data->map->north_path);
+	// printf("s [%s]\n", data->map->south_path);
+	// printf("e [%s]\n", data->map->east_path);
+	// printf("w [%s]\n", data->map->west_path);
+	// printf("f [%s]\n", data->map->f);
+	// printf("c [%s]\n", data->map->c);
 	// print_map(data);
 }

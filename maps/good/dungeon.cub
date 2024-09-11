@@ -1,8 +1,8 @@
-F 76,76,76
-C 199,99,9910
+F 256,76,76
+C 199,99,155
 
 NO textures/simonkraft/cobblestone.xpm
-
+ 
 SO textures/simonkraft/cobblestone_01.xpm
 
 WE textures/simonkraft/mossy_cobblestone1.xpm

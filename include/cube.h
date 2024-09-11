@@ -15,6 +15,10 @@ typedef struct s_map
 	int			start_line;
 	char		*f;
 	char		*c;
+	int			is_f;
+	int			is_c;
+	int			f_tab[3];
+	int			c_tab[3];
 	int			nb_lines;
 	int			width;
 	int			height;
@@ -46,5 +50,7 @@ int				is_info(char *line);
 void			check_is_close(t_data *data);
 void			parse_map(t_data *data);
 void			check_valid_char(t_data *data);
+char	*ft_strducube(const char *s);
+void	split_rgb(t_data *data, char *rgb);
 
 #endif
