@@ -10,7 +10,7 @@ int	main(int ac, char **av)
 		ft_bzero(&map, sizeof(t_map));
 		ft_bzero(&data, sizeof(t_data));
 		data.map = &map;
-		get_dimensions(av[1], &data);
+		get_height(av[1], &data);
 		read_map(av[1], &data);
 		parse_map(&data);
 		// print_map(&data);

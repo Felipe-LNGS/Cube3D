@@ -33,7 +33,8 @@ typedef struct s_data
 }				t_data;
 
 int				check_format(char *map);
-int				get_dimensions(char *filename, t_data *data);
+void			get_width(t_data *data);
+int				get_height(char *filename, t_data *data);
 int				read_map(char *filename, t_data *data);
 void			free_grid(t_data *data);
 void			print_map(t_data *data);

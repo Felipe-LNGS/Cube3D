@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/10 17:45:35 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 10:39:26 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ void	parse_map(t_data *data)
 			stock_info(data->map->grid[i], data);
 		i++;
 	}
-	
-	data->map->height = data->map->nb_lines - data->map->start_line;
+	get_width(data);
 printf("max lines%d\n", data->map->nb_lines);
 	printf("max height %d\n", data->map->height);
 	rework_map(data);

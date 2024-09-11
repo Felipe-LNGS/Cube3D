@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/10 17:52:09 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/11 10:40:12 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	open_file(char *filename)
 }
 
 // Calcul la longueur et largeur de la map
-int	get_dimensions(char *filename, t_data *data)
+int	get_height(char *filename, t_data *data)
 {
 	int		fd;
 	char	*line;
@@ -64,6 +64,29 @@ int	get_dimensions(char *filename, t_data *data)
 	}
 	close(fd);
 	return (0);
+}
+
+void	get_width(t_data *data)
+{
+	int	x;
+	int	line_length;
+
+	data->map->height = data->map->nb_lines - data->map->start_line;
+	x = data->map->start_line;
+	while (x < data->map->nb_lines)
+	{
+		line_length = 0;
+		while (data->map->grid[x][line_length] != '\0'
+			&& data->map->grid[x][line_length] != '\n')
+		{
+			line_length++;
+		}
+		if (line_length > data->map->width)
+		{
+			data->map->width = line_length;
+		}
+		x++;
+	}
 }
 
 // Stock les valeurs lu avec gnl dans data->data->map
@@ -102,41 +125,21 @@ void	rework_map(t_data *data)
 	int		y;
 	int		line_length;
 
-	x = data->map->start_line;
 	y = 0;
-		while (x < data->map->nb_lines)
-	{
-		line_length = 0;
-		while (data->map->grid[x][line_length] != '\0'
-			&& data->map->grid[x][line_length] != '\n')
-		{
-			line_length++;
-		}
-		if (line_length > data->map->width)
-		{
-			data->map->width = line_length; // Mettre à jour la largeur maximale
-		}
-		x++;
-	}
-
 	x = data->map->start_line;
-	tmp_grid = malloc(sizeof(char *) * (data->map->height+1));
+	tmp_grid = ft_calloc(sizeof(char *), (data->map->height + 1));
 	if (!tmp_grid)
-		return ; 
+		return ;
 	while (x < data->map->nb_lines)
 	{
 		tmp_grid[y] = malloc(sizeof(char) * (data->map->width + 1));
 		if (!tmp_grid[y])
 		{
-			while (y > 0)
-			{
-				free(tmp_grid[--y]);
-			}
-			free(tmp_grid);
+			free_split(tmp_grid);
 			return ;
 		}
 		line_length = 0;
-		while (line_length < data->map->width 
+		while (line_length < data->map->width
 			&& data->map->grid[x][line_length] != '\0')
 		{
 			tmp_grid[y][line_length] = data->map->grid[x][line_length];
