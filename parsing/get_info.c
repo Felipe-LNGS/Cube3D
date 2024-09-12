@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 12:37:39 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 13:53:14 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ void	stock_info_bis(char *line, t_data *data)
 	char	*space_skiped;
 
 	space_skiped = skip_space(line);
-	if (!ft_strncmp(line, "F ", 2))
-	{
-		space_skiped = skip_space(space_skiped + 2);
-		data->map->f = ft_strducube(space_skiped, data);
-		if (!data->map->f)
-			exit_free(data, MERROR);
-	}
-	else if (!ft_strncmp(line, "C ", 2))
-	{
-		space_skiped = skip_space(space_skiped + 2);
-		data->map->c = ft_strducube(space_skiped, data);
-		if (!data->map->c)
-			exit_free(data, MERROR);
-	}
+ if (!ft_strncmp(line, "F ", 2))
+    {
+        space_skiped = skip_space(space_skiped + 2);
+        // Copy the string into the fixed-size array
+        strncpy(data->map->f, space_skiped, SIZE - 1);
+        data->map->f[SIZE - 1] = '\0'; // Ensure null-termination
+    }
+    else if (!ft_strncmp(line, "C ", 2))
+    {
+        space_skiped = skip_space(space_skiped + 2);
+        // Copy the string into the fixed-size array
+        strncpy(data->map->c, space_skiped, SIZE - 1);
+        data->map->c[SIZE - 1] = '\0'; // Ensure null-termination
+    }
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
