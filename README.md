@@ -1,1 +1,1 @@
-This a 3D game.
+This is a 3D game.
