@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 14:50:35 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:23:20 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ void	check_valid_char(t_data *data)
 	int	x;
 	int	y;
 	int	nb_start;
-
+	
 	nb_start = 0;
 	x = 0;
 	while (x < data->map->height)
 	{
 		y = 0;
-		while (y < data->map->width)
+		while (y < data->map->width )
 		{
-			if ((ft_strchr(" 01NSEW", data->map->tmp_grid[x][y]) == NULL))
+			if ((ft_strchr(" 01NSEW\n", data->map->tmp_grid[x][y]) == NULL))
 			{
+				ft_printf("[%d][%d][%c]\n", x, y, data->map->tmp_grid[x][y]);
 				exit_free(data, "Invalid character need to put only 01NSEW");
 			}
 			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
@@ -47,25 +48,26 @@ void	check_is_close(t_data *data)
 
 	map = data->map->tmp_grid;
 	x = 0;
-	while (x < data->map->height )
+	while (x < data->map->height)
 	{
 		y = 0;
 		while (y < data->map->width)
 		{
-				printf("map[%d][%d] \n", x, y);
-			
 			if (ft_strchr("0NSEW", map[x][y]))
 			{
 				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
 					|| y == data->map->width - 1)
 				{
-					exit_free(data, "Map not closed: character on the edge.");
+					ft_printf(RED "Map not closed: character on the edge\n" RESET);
+					exit(1);
 				}
 				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
 						- 1 >= 0 && map[x - 1][y] == ' ') || (y
 						+ 1 < data->map->width && map[x][y + 1] == ' ') || (y
 						- 1 >= 0 && map[x][y - 1] == ' '))
-					exit_free(data, "Map not closed: adjacent to empty space.");
+				{
+					ft_printf(RED "Map not closed: adjacent to empty space\n" RESET);
+				}
 			}
 			y++;
 		}
@@ -97,15 +99,16 @@ void	parse_map(t_data *data)
 	find_start_line(data);
 	get_width(data);
 	rework_map(data);
-	// print_map(data);
-	// printf("north[%s]\n", data->map->north_path);
-	// printf("s [%s]\n", data->map->south_path);
-	// printf("e [%s]\n", data->map->east_path);
-	// printf("w [%s]\n", data->map->west_path);
-	// printf("f [%s]\n", data->map->f);
-	// printf("c [%s]\n", data->map->c);
+	print_map(data);
+	printf("north[%s]\n", data->map->north_path);
+	printf("s [%s]\n", data->map->south_path);
+	printf("e [%s]\n", data->map->east_path);
+	printf("w [%s]\n", data->map->west_path);
+	printf("f [%s]\n", data->map->f);
+	printf("c [%s]\n", data->map->c);
 	check_valid_char(data);
 	check_is_close(data);
 	split_rgb(data, data->map->f, 'F');
 	split_rgb(data, data->map->c, 'C');
+	
 }
