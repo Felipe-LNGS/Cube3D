@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 16:44:18 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:10:57 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ void	check_valid_char(t_data *data)
 	int	x;
 	int	y;
 	int	nb_start;
-
+	
 	nb_start = 0;
 	x = 0;
 	while (x < data->map->height)
 	{
 		y = 0;
-		while (y < data->map->width)
+		while (y < data->map->width )
 		{
 			if ((ft_strchr(" 01NSEW", data->map->tmp_grid[x][y]) == NULL))
+			{
 				exit_free(data, "Invalid character need to put only 01NSEW");
 			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
 			{
@@ -39,6 +40,7 @@ void	check_valid_char(t_data *data)
 			exit_free(data, "Error: more than one start position found.");
 		x++;
 	}
+}
 }
 
 void	check_is_close(t_data *data)
@@ -56,14 +58,18 @@ void	check_is_close(t_data *data)
 		{
 			if (ft_strchr("0NSEW", map[x][y]))
 			{
-				if (x == 0 || x == data->map->height - 1 || y == 0
+				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
 					|| y == data->map->width - 1)
+				{
 					exit_free(data, "Map not closed: character on the edge.");
+				}
 				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
 						- 1 >= 0 && map[x - 1][y] == ' ') || (y
 						+ 1 < data->map->width && map[x][y + 1] == ' ') || (y
 						- 1 >= 0 && map[x][y - 1] == ' '))
-					exit_free(data, "Map not closed: adjacent to empty space.");
+				{
+					ft_printf(RED "Map not closed: adjacent to empty space\n" RESET);
+				}
 			}
 			y++;
 		}
@@ -144,7 +150,13 @@ void	parse_map(t_data *data)
 	find_start_line(data);
 	get_width(data);
 	rework_map(data);
-	print_map(data);
+	// print_map(data);
+	// printf("north[%s]\n", data->map->north_path);
+	// printf("s [%s]\n", data->map->south_path);
+	// printf("e [%s]\n", data->map->east_path);
+	// printf("w [%s]\n", data->map->west_path);
+	// printf("f [%s]\n", data->map->f);
+	// printf("c [%s]\n", data->map->c);
 	check_valid_char(data);
 	check_is_close(data);
 	get_pos(data);
@@ -152,16 +164,4 @@ void	parse_map(t_data *data)
 	printf("c path[%s]\n", data->map->c);
 	split_rgb(data, data->map->f, 'F');
 	split_rgb(data, data->map->c, 'C');
-	printf("f color[%d]\n", data->map->f_color);
-	printf("c color[%d]\n", data->map->c_color);
-	printf("north[%s]\n", data->map->north_path);
-	printf("s [%s]\n", data->map->south_path);
-	printf("e [%s]\n", data->map->east_path);
-	printf("w [%s]\n", data->map->west_path);
-	printf("f [%s]\n", data->map->f);
-	printf("c [%s]\n", data->map->c);
-	printf("pos x %d\n", data->posx_p);
-	printf("pos y %d\n", data->posy_p);
-	printf("pos map x %d\n", data->map_x);
-	printf("pos map y %d\n", data->map_y);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 14:04:27 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:30:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ void	free_grid(t_data *data)
 		i++;
 	}
 	free(data->map->grid);
+}
+
+void	free_grid2(char **grid, int height)
+{
+	int	i;
+
+	i = 0;
+	while (i < height)
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
 }
 
 void	print_map(t_data *data)
@@ -51,24 +64,22 @@ char	*skip_space(char *line)
 	return (line);
 }
 
-char	*ft_strducube(char *s, t_data *data)
+char	*ft_strducube( char *s, t_data *data)
 {
 	char	*dest;
-	int		i;
+	int		i = 0, j;
 	int		len;
-	int		j;
 
-	i = 0;
-	j = 0;
+	i = 0, j = 0;
 	len = 0;
 	while (s[len] != '\0')
 	{
-		if (s[len] != '\n')
+		if (s[len] != '\n') 
 			len++;
 		else
 			len++;
 	}
-	dest = malloc((len + 1) * sizeof(char));
+	dest = malloc((len + 1) * sizeof(char)); 
 	if (!dest)
 		return (exit_free(data, MERROR), NULL);
 	while (s[i] != '\0')

@@ -6,7 +6,11 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/09/12 12:08:30 by plangloi         ###   ########.fr       */
+=======
 /*   Updated: 2024/09/12 15:51:24 by plangloi         ###   ########.fr       */
+>>>>>>> origin/ficello
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +36,9 @@ static int	open_file(t_data *data, char *filename)
 
 	fd = open(filename, __O_DIRECTORY);
 	if (fd > 0)
+	{
 		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (close(fd), exit_free(data, "Error\nFailed to open file."), 1);
@@ -74,7 +80,7 @@ void	get_width(t_data *data)
 	{
 		line_length = 0;
 		while (data->map->grid[x][line_length] != '\0'
-			&& data->map->grid[x][line_length] != '\n')
+				&& data->map->grid[x][line_length] != '\n')
 		{
 			line_length++;
 		}
@@ -136,6 +142,42 @@ void	print_tmp_grid(t_data *data)
 		i++;
 	}
 }
+// void	rework_map(t_data *data)
+// {
+// 	char	**tmp_grid;
+// 	int		x;
+// 	int		line_length;
+// 	int		start;
+
+// 	start = data->map->start_line;
+// 	x = 0;
+// 	tmp_grid = ft_calloc(data->map->height, sizeof(char *));
+// 	if (!tmp_grid)
+// 		exit_free(data, MERROR);
+// 	while (start < data->map->nb_lines)
+// 	{
+// 		tmp_grid[x] = ft_calloc(data->map->width, sizeof(char));
+// 		if (!tmp_grid[x])
+// 			exit_free(data, MERROR);
+// 		line_length = 0;
+// 		while (data->map->grid[x][line_length] != '\n'
+// 			&& line_length < data->map->width)
+// 		{
+// 			tmp_grid[x][line_length] = data->map->grid[start][line_length];
+// 			line_length++;
+// 		}
+// 		while (line_length < data->map->width)
+// 		{
+// 			tmp_grid[x][line_length] = ' ';
+// 			line_length++;
+// 		}
+// 		tmp_grid[x][line_length] = '\0';
+// 		start++;
+// 		x++;
+// 	}
+// 	data->map->tmp_grid = tmp_grid;
+// 	print_tmp_grid(data);
+// }
 
 void	rework_map(t_data *data)
 {
@@ -145,22 +187,31 @@ void	rework_map(t_data *data)
 	int		y;
 
 	start = data->map->start_line;
+<<<<<<< HEAD
+	map = ft_calloc(sizeof(char *), data->map->height);
+=======
 	map = ft_calloc(sizeof(char *), data->map->height + 1);
 	if (!map)
 		exit_free(data, MERROR);
+>>>>>>> origin/ficello
 	x = 0;
 	while (start < data->map->nb_lines)
 	{
 		y = 0;
 		map[x] = ft_calloc(sizeof(char), data->map->width);
+<<<<<<< HEAD
+		while (data->map->grid[start][y] != '\n' && y < data->map->width)
+=======
 		if (!map[x])
 			exit_free(data, MERROR);
 		while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
 			&& y < data->map->width)
+>>>>>>> origin/ficello
 		{
 			map[x][y] = data->map->grid[start][y];
 			y++;
 		}
+
 		while (y < data->map->width)
 		{
 			map[x][y] = ' ';
@@ -170,6 +221,11 @@ void	rework_map(t_data *data)
 		start++;
 	}
 	data->map->tmp_grid = map;
+<<<<<<< HEAD
+	// print_tmp_grid(data);
+}
+=======
 }
 
 // pos joueur et orientation
+>>>>>>> origin/ficello

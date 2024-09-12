@@ -41,6 +41,7 @@ typedef struct img_s
 
 typedef struct s_data
 {
+	int		fd;
 	int		posx_p;	//x-coordinate start position player on .cub grid
 	int		posy_p;	//y-coordinate start position player ...
 	int		map_x; 	//x-coordinate continuous position of player on rendered grid
@@ -51,7 +52,7 @@ typedef struct s_data
 	int		sizey; 	//comupter display height
 	void	*window;
 	void	*mlx;
-	t_imgs	img;
+	// t_imgs	img;
 	t_map	*map;
 }			t_data;
 
@@ -73,10 +74,15 @@ void		split_rgb(t_data *data, char *rgb, char who);
 int			rgb_to_int(int *rgb);
 void		parse_map(t_data *data);
 /*-------------------UTILS-------------------*/
-void		free_grid(t_data *data);
 char		*ft_strducube(char *s, t_data *data);
-void		exit_free(t_data *data, char *str);
+/*--------------------FREE--------------------*/
 void		free_all(t_data *data);
 void		free_map(t_data *data);
+void		free_grid(t_data *data);
+void		free_grid2(char **grid, int height);
+void		free_struct(t_data *data);
+void		exit_free(t_data *data, char *str);
+/*--------------------MLX--------------------*/
+void		initiate_mlx(t_data *data);
 
 #endif
