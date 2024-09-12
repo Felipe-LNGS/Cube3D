@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:36:03 by plangloi          #+#    #+#             */
-/*   Updated: 2024/06/13 19:08:04 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:46:21 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_check_line(char *line, int fd)
 			return (free(line), free(temp), NULL);
 		temp[bytes_read] = '\0';
 		line = ft_join_free(line, temp);
+		if (!line)
+			return (NULL);
 	}
 	return (free(temp), line);
 }
