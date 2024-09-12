@@ -1,6 +1,7 @@
 #ifndef CUBE_H
 # define CUBE_H
 
+# include <math.h>
 # include "../.libft/libft.h"
 # include "../.minilibx-linux/mlx.h"
 #define SIZE_TAB 3
@@ -22,12 +23,35 @@ typedef struct s_map
 	int		f_tab[SIZE_TAB];
 	int		c_tab[SIZE_TAB];
 	int		nb_lines;
-	int		width;
-	int		height;
+	int		width;		//map width
+	int		height;		//map height
 }			t_map;
+
+typedef struct img_s
+{
+	int		height;
+	int		width;
+	
+	// void	*img_wall;
+	// void	*img_path;
+	// char	*wall;
+	// char	*path;
+
+}			t_imgs;
 
 typedef struct s_data
 {
+	int		posx_p;	//x-coordinate start position player on .cub grid
+	int		posy_p;	//y-coordinate start position player ...
+	int		map_x; 	//x-coordinate continuous position of player on rendered grid
+	int		map_y; 	//y-coordinate continuous position of player ...
+
+
+	int		sizex; 	//computer display width
+	int		sizey; 	//comupter display height
+	void	*window;
+	void	*mlx;
+	t_imgs	img;
 	t_map	*map;
 }			t_data;
 
