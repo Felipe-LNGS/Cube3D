@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:31:19 by plangloi          #+#    #+#             */
-/*   Updated: 2024/02/01 16:25:55 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:53:51 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_countwords(char const *s, char c)
 			words++;
 		i++;
 	}
-	return (words +1);
+	return (words + 1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -40,16 +40,15 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	dest = ft_calloc((ft_countwords(s, c)), sizeof(char *));
+	if (!dest)
+		return (NULL);
 	while (++j < ft_countwords(s, c) - 1)
 	{
 		while (s[i] && s[i] == c)
 			i++;
 		len = 0;
-		while (s[i] && s[i] != c)
-		{
+		while (s[i] && s[++i] != c)
 			len++;
-			i++;
-		}
 		dest[j] = ft_strndup(((char *)s + i - len), len);
 		if (!dest[j])
 			return (free_split(dest), NULL);

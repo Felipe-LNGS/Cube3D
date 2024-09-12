@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 14:43:51 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:51:24 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,15 @@ int	read_map(char *filename, t_data *data)
 }
 void	print_tmp_grid(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	if (data == NULL || data->map == NULL || data->map->tmp_grid == NULL)
 	{
 		printf("Error: No data to print.\n");
 		return ;
 	}
-	for (int i = 0; i < data->map->height; i++)
+	while (i < data->map->height)
 	{
 		if (data->map->tmp_grid[i] != NULL)
 		{
@@ -130,6 +133,7 @@ void	print_tmp_grid(t_data *data)
 		{
 			printf("Line %d is NULL\n", i);
 		}
+		i++;
 	}
 }
 
@@ -141,13 +145,18 @@ void	rework_map(t_data *data)
 	int		y;
 
 	start = data->map->start_line;
-	map = ft_calloc(sizeof(char *), data->map->height +1);
+	map = ft_calloc(sizeof(char *), data->map->height + 1);
+	if (!map)
+		exit_free(data, MERROR);
 	x = 0;
 	while (start < data->map->nb_lines)
 	{
 		y = 0;
 		map[x] = ft_calloc(sizeof(char), data->map->width);
-		while (data->map->grid[start][y] && data->map->grid[start][y] != '\n' && y < data->map->width)
+		if (!map[x])
+			exit_free(data, MERROR);
+		while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
+			&& y < data->map->width)
 		{
 			map[x][y] = data->map->grid[start][y];
 			y++;
@@ -160,7 +169,7 @@ void	rework_map(t_data *data)
 		x++;
 		start++;
 	}
-	 data->map->tmp_grid = map;
+	data->map->tmp_grid = map;
 }
 
-//pos joueur et orientation
+// pos joueur et orientation

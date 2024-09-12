@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 14:39:46 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:47:31 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	split_rgb(t_data *data, char *rgb, char who)
 	if (!rgb)
 		exit_free(data, "Missing rgb code");
 	splited = ft_split(rgb, ',');
+	if(!splited)
+		exit_free(data, MERROR);
 	i = 0;
 	while (i < 3)
 	{
@@ -139,8 +141,8 @@ void	split_rgb(t_data *data, char *rgb, char who)
 		i++;
 	}
 	if (who == 'F')
-		data->map->c_color = rgb_to_int(data->map->f_tab);
+		data->map->f_color = rgb_to_int(data->map->f_tab);
 	if (who == 'C')
-		data->map->f_color = rgb_to_int(data->map->c_tab);
+		data->map->c_color = rgb_to_int(data->map->c_tab);
 	free_split(splited);
 }
