@@ -41,6 +41,7 @@ typedef struct img_s
 
 typedef struct s_data
 {
+	int		fd;
 	int		posx_p;	//x-coordinate start position player on .cub grid
 	int		posy_p;	//y-coordinate start position player ...
 	int		map_x; 	//x-coordinate continuous position of player on rendered grid

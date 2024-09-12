@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:22:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 14:20:40 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/12 14:44:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,4 @@ void	initiate_mlx(t_data *data)
 	data->map_x = data->posx_p * 50;
 	data->map_y = data->posy_p * 50;
 }
+
