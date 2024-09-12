@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 12:23:20 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:31:09 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_is_close(t_data *data)
 		{
 			if (ft_strchr("0NSEW", map[x][y]))
 			{
-				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
+				if (x == 0 || x == data->map->height- 1 || y == 0
 					|| y == data->map->width - 1)
 				{
 					ft_printf(RED "Map not closed: character on the edge\n" RESET);
