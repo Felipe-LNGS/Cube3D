@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 13:53:35 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 13:36:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	is_info(char *line)
 	else
 		return (0);
 }
+
 static int	check_value(char *str)
 {
 	int	i;
@@ -114,6 +115,7 @@ static int	check_value(char *str)
 		return (1);
 	return (0); // Tout est valide
 }
+
 void	split_rgb(t_data *data, char *rgb, char who)
 {
 	char	**splited;

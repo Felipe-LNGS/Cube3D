@@ -15,6 +15,8 @@ int	main(int ac, char **av)
 		parse_map(&data);
 		// print_map(&data);
 	}
+	else 
+		return(ft_printf(RED"Error\nWrong number of arguments!\n"RESET), 0);
 	// free_grid(&data);
 	// free(data);
 }

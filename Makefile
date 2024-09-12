@@ -15,12 +15,21 @@ MLX_EX      =   $(MLX_LIB) $(MLX_FLAGS)
 
 LIBFT_LIB   =   $(LIBFT_PATH)/$(LIBFT_FILE)
 
-C_FILE		 = 		main.c								\
-					parsing/utils_parse.c				\
-					parsing/get_map.c					\
-					parsing/get_info.c					\
-					parsing/parse.c						\
-					free/exit_and_free.c				\
+C_FILE		= 	$(addsuffix .c,						\
+				$(addprefix parsing/, 				\
+					utils_parse						\
+					get_map							\
+					get_info						\
+					parse							\
+				)									\
+				$(addprefix free/, 					\
+									exit_and_free	\
+				)									\
+				$(addprefix srcs/, 					\
+					set_struct_core					\
+				)									\
+				main								\
+				)									\
 
 OBJS        =   $(C_FILE:.c=.o)
 DEPS		=	$(OBJS:.o=.d)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 12:36:23 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:30:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ void	free_grid(t_data *data)
 		i++;
 	}
 	free(data->map->grid);
+}
+
+void	free_grid2(char **grid, int height)
+{
+	int	i;
+
+	i = 0;
+	while (i < height)
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
 }
 
 void	print_map(t_data *data)

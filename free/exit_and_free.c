@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_and_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 13:53:49 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:32:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,20 @@ void	exit_free(t_data *data, char *str)
 	ft_printf(RED "%s\n" RESET, str);
 	free_map(data);
 	exit(1);
+}
+
+void	free_struct(t_data *data)
+{
+	free_grid2(data->map->grid, data->map->height);
+	free_grid2(data->map->tmp_grid, data->map->height);
+	// free_img_data(data);
+	// if (data->window != NULL)
+	// 	mlx_destroy_window(data->mlx, data->window);
+	// if (data->mlx != NULL)
+	// {
+	// 	mlx_destroy_display(data->mlx);
+	// 	free(data->mlx);
+	// }
+	free(data->mlx);
+	exit(0);
 }
