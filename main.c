@@ -15,6 +15,7 @@ int	main(int ac, char **av)
 		parse_map(&data);
 		// print_map(&data);
 	}
+	free_all(&data);
 	// free_grid(&data);
 	// free(data);
 }
