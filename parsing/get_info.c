@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 18:18:09 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:37:39 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	stock_info_bis(char *line, t_data *data)
 	if (!ft_strncmp(line, "F ", 2))
 	{
 		space_skiped = skip_space(space_skiped + 2);
-		data->map->f = ft_strducube(space_skiped);
+		data->map->f = ft_strducube(space_skiped, data);
 		if (!data->map->f)
 			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "C ", 2))
 	{
 		space_skiped = skip_space(space_skiped + 2);
-		data->map->c = ft_strducube(space_skiped);
+		data->map->c = ft_strducube(space_skiped, data);
 		if (!data->map->c)
 			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
-		data->map->east_path = ft_strducube(space_skiped);
+		data->map->east_path = ft_strducube(space_skiped, data);
 		if (!data->map->east_path)
 			exit_free(data, MERROR);
 	}
@@ -48,21 +48,21 @@ void	stock_info(char *line, t_data *data)
 	if (!ft_strncmp(line, "NO ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
-		data->map->north_path = ft_strducube(space_skiped);
+		data->map->north_path = ft_strducube(space_skiped, data);
 		if (!data->map->north_path)
 			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
-		data->map->south_path = ft_strducube(space_skiped);
+		data->map->south_path = ft_strducube(space_skiped, data);
 		if (!data->map->south_path)
 			exit_free(data, MERROR);
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		space_skiped = skip_space(space_skiped + 3);
-		data->map->west_path = ft_strducube(space_skiped);
+		data->map->west_path = ft_strducube(space_skiped, data);
 		if (!data->map->west_path)
 			exit_free(data, MERROR);
 	}
@@ -89,19 +89,30 @@ int	is_info(char *line)
 static int	check_value(char *str)
 {
 	int	i;
+	int	digit_count;
 
 	i = 0;
+	digit_count = 0;
 	while (str[i])
 	{
-		if (ft_strlen(str) > 3)
-			return (1);
-		if (!ft_isdigit(str[i]))
-			return (1);
-		if (ft_atoi(str) > 255)
+		if (str[i] == '\n')
+		{
+			i++;
+			continue ; // Passer à l'itération suivante
+		}
+		if (ft_isdigit(str[i]))
+			digit_count++;
+		else
 			return (1);
 		i++;
 	}
-	return (0);
+	if (ft_strlen(str) > 3)
+		return (1);
+	if (ft_atoi(str) > 255)
+		return (1);
+	if (digit_count == 0)
+		return (1);
+	return (0); // Tout est valide
 }
 void	split_rgb(t_data *data, char *rgb, char who)
 {
@@ -113,15 +124,16 @@ void	split_rgb(t_data *data, char *rgb, char who)
 	while (i < 3)
 	{
 		if (check_value(splited[i]) == 1)
-			exit_free(data, "Invalid rgb code");
-		if (who =='F')
+			(free_split(splited), exit_free(data, "Invalid rgb code"));
+		if (who == 'F')
 			data->map->f_tab[i] = ft_atoi(splited[i]);
-		if (who =='C')
+		if (who == 'C')
 			data->map->c_tab[i] = ft_atoi(splited[i]);
 		i++;
 	}
-	if (who =='F')
+	if (who == 'F')
 		data->map->c_color = rgb_to_int(data->map->f_tab);
-	if (who =='C')
+	if (who == 'C')
 		data->map->f_color = rgb_to_int(data->map->c_tab);
+	free_split(splited);
 }

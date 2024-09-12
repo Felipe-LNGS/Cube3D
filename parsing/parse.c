@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 18:18:34 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:23:20 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,25 @@ void	check_valid_char(t_data *data)
 	int	x;
 	int	y;
 	int	nb_start;
-
+	
 	nb_start = 0;
-	x = data->map->start_line;
-	while (x < data->map->nb_lines)
+	x = 0;
+	while (x < data->map->height)
 	{
-		y = -1;
-		while (++y < data->map->width)
+		y = 0;
+		while (y < data->map->width )
 		{
-			ft_printf("%c", data->map->tmp_grid[x][y]);
-			if ((ft_strchr("01NSEW ", data->map->tmp_grid[x][y]) == NULL))	
-				exit_free(data,"Invalid character need to put only 01NSEW");
+			if ((ft_strchr(" 01NSEW\n", data->map->tmp_grid[x][y]) == NULL))
+			{
+				ft_printf("[%d][%d][%c]\n", x, y, data->map->tmp_grid[x][y]);
+				exit_free(data, "Invalid character need to put only 01NSEW");
+			}
 			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
 				nb_start++;
+			y++;
 		}
 		if (nb_start > 1)
-			exit_free(data,"Error: more than one start position found.");
+			exit_free(data, "Error: more than one start position found.");
 		x++;
 	}
 }
@@ -44,8 +47,8 @@ void	check_is_close(t_data *data)
 	char	**map;
 
 	map = data->map->tmp_grid;
-	x = data->map->start_line;
-	while (x < data->map->nb_lines)
+	x = 0;
+	while (x < data->map->height)
 	{
 		y = 0;
 		while (y < data->map->width)
@@ -64,7 +67,6 @@ void	check_is_close(t_data *data)
 						- 1 >= 0 && map[x][y - 1] == ' '))
 				{
 					ft_printf(RED "Map not closed: adjacent to empty space\n" RESET);
-					
 				}
 			}
 			y++;
@@ -82,8 +84,8 @@ void	find_start_line(t_data *data)
 	{
 		if (is_info(data->map->grid[i]))
 			stock_info(data->map->grid[i], data);
-		else if (ft_strchr(data->map->grid[i], '0') || ft_strchr(data->map->grid[i],
-				'1'))
+		else if (ft_strchr(data->map->grid[i], '0')
+			|| ft_strchr(data->map->grid[i], '1'))
 		{
 			data->map->start_line = i;
 			return ;
@@ -97,16 +99,16 @@ void	parse_map(t_data *data)
 	find_start_line(data);
 	get_width(data);
 	rework_map(data);
+	print_map(data);
+	printf("north[%s]\n", data->map->north_path);
+	printf("s [%s]\n", data->map->south_path);
+	printf("e [%s]\n", data->map->east_path);
+	printf("w [%s]\n", data->map->west_path);
+	printf("f [%s]\n", data->map->f);
+	printf("c [%s]\n", data->map->c);
 	check_valid_char(data);
 	check_is_close(data);
-	print_map(data);
-
 	split_rgb(data, data->map->f, 'F');
 	split_rgb(data, data->map->c, 'C');
-	// printf("north[%s]\n", data->map->north_path);
-	// printf("s [%s]\n", data->map->south_path);
-	// printf("e [%s]\n", data->map->east_path);
-	// printf("w [%s]\n", data->map->west_path);
-	// printf("f [%s]\n", data->map->f);
-	// printf("c [%s]\n", data->map->c);
+	
 }

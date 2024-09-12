@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/11 16:55:47 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:36:23 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_map(t_data *data)
 	while (i < data->map->height)
 	{
 		j = 0;
-		while (j  < data->map->width)
+		while (j < data->map->width)
 		{
 			ft_printf("%c", data->map->tmp_grid[i][j]);
 			j++;
@@ -51,27 +51,38 @@ char	*skip_space(char *line)
 	return (line);
 }
 
-char	*ft_strducube(char *s)
+char	*ft_strducube( char *s, t_data *data)
 {
 	char	*dest;
-	int		i;
+	int		i = 0, j;
+	int		len;
 
-	i = 0;
-	dest = malloc(ft_strlen(s) * sizeof(char));
+	i = 0, j = 0;
+	len = 0;
+	while (s[len] != '\0')
+	{
+		if (s[len] != '\n') 
+			len++;
+		else
+			len++;
+	}
+	dest = malloc((len + 1) * sizeof(char)); 
 	if (!dest)
-		return (NULL);
-	while (s[i])
+		return (exit_free(data, MERROR), NULL);
+	while (s[i] != '\0')
 	{
 		if (s[i] != '\n')
-			dest[i] = s[i];
+		{
+			dest[j] = s[i];
+			j++;
+		}
 		i++;
 	}
-	dest[i] = '\0';
+	dest[j] = '\0';
 	return (dest);
 }
 
-
-int rgb_to_int(int *rgb)
+int	rgb_to_int(int *rgb)
 {
 	int	color;
 
