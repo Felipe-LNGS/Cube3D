@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 12:36:23 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:04:27 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,24 @@ char	*skip_space(char *line)
 	return (line);
 }
 
-char	*ft_strducube( char *s, t_data *data)
+char	*ft_strducube(char *s, t_data *data)
 {
 	char	*dest;
-	int		i = 0, j;
+	int		i;
 	int		len;
+	int		j;
 
-	i = 0, j = 0;
+	i = 0;
+	j = 0;
 	len = 0;
 	while (s[len] != '\0')
 	{
-		if (s[len] != '\n') 
+		if (s[len] != '\n')
 			len++;
 		else
 			len++;
 	}
-	dest = malloc((len + 1) * sizeof(char)); 
+	dest = malloc((len + 1) * sizeof(char));
 	if (!dest)
 		return (exit_free(data, MERROR), NULL);
 	while (s[i] != '\0')

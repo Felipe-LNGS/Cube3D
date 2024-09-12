@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 13:53:49 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:20:36 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_map(t_data *data)
 {
 	if (data->map->grid)
-		free_grid(data);
+		free_split(data->map->grid);
 	if (data->map->tmp_grid)
 		free_split(data->map->tmp_grid);
 	if (data->map->north_path)
@@ -27,9 +27,14 @@ void	free_map(t_data *data)
 	if (data->map->west_path)
 		free(data->map->west_path);
 	if (data->map->f)
+	{
 		free(data->map->f);
+	}
 	if (data->map->c)
+	{
+		
 		free(data->map->c);
+	}
 }
 
 void	free_all(t_data *data)
