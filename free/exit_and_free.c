@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_and_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/12 14:32:51 by codespace        ###   ########.fr       */
-=======
-/*   Updated: 2024/09/12 15:44:31 by plangloi         ###   ########.fr       */
->>>>>>> origin/ficello
+/*   Updated: 2024/09/12 17:12:45 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
