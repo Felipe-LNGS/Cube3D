@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:01:21 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:43:22 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,19 @@ void	check_valid_char(t_data *data)
 		y = 0;
 		while (y < data->map->width)
 		{
-			if ((ft_strchr(" 01NSEW", data->map->tmp_grid[x][y]) == NULL))
-			{
+			if ((ft_strchr(" 01NSEW\n", data->map->tmp_grid[x][y]) == NULL))
 				exit_free(data, "Invalid character need to put only 01NSEW");
-				if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
-				{
-					data->posx_p = x;
-					data->posy_p = y;
-					nb_start++;
-				}
-				y++;
+			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
+			{
+				data->posx_p = x;
+				data->posy_p = y;
+				nb_start++;
 			}
+			y++;
 			if (nb_start > 1)
 				exit_free(data, "Error: more than one start position found.");
-			x++;
 		}
+		x++;
 	}
 }
 
@@ -58,7 +56,7 @@ void	check_is_close(t_data *data)
 		{
 			if (ft_strchr("0NSEW", map[x][y]))
 			{
-				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
+				if (x == 0 || x == data->map->height - 1 || y == 0
 					|| y == data->map->width - 1)
 					exit_free(data, "Map not closed: character on the edge.");
 				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
@@ -72,7 +70,7 @@ void	check_is_close(t_data *data)
 	}
 }
 
-void	set_dir(t_data *data, char who)
+static void	set_dir(t_data *data, char who)
 {
 	if (who == 'N')
 	{

@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 09:58:42 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:43:55 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	get_width(t_data *data)
 	{
 		line_length = 0;
 		while (data->map->grid[x][line_length] != '\0'
-				&& data->map->grid[x][line_length] != '\n')
+			&& data->map->grid[x][line_length] != '\n')
 		{
 			line_length++;
 		}
@@ -138,42 +138,6 @@ void	print_tmp_grid(t_data *data)
 		i++;
 	}
 }
-// void	rework_map(t_data *data)
-// {
-// 	char	**tmp_grid;
-// 	int		x;
-// 	int		line_length;
-// 	int		start;
-
-// 	start = data->map->start_line;
-// 	x = 0;
-// 	tmp_grid = ft_calloc(data->map->height, sizeof(char *));
-// 	if (!tmp_grid)
-// 		exit_free(data, MERROR);
-// 	while (start < data->map->nb_lines)
-// 	{
-// 		tmp_grid[x] = ft_calloc(data->map->width, sizeof(char));
-// 		if (!tmp_grid[x])
-// 			exit_free(data, MERROR);
-// 		line_length = 0;
-// 		while (data->map->grid[x][line_length] != '\n'
-// 			&& line_length < data->map->width)
-// 		{
-// 			tmp_grid[x][line_length] = data->map->grid[start][line_length];
-// 			line_length++;
-// 		}
-// 		while (line_length < data->map->width)
-// 		{
-// 			tmp_grid[x][line_length] = ' ';
-// 			line_length++;
-// 		}
-// 		tmp_grid[x][line_length] = '\0';
-// 		start++;
-// 		x++;
-// 	}
-// 	data->map->tmp_grid = tmp_grid;
-// 	print_tmp_grid(data);
-// }
 
 void	rework_map(t_data *data)
 {
@@ -182,19 +146,23 @@ void	rework_map(t_data *data)
 	int		start;
 	int		y;
 
-	start = data->map->start_line;
-	map = ft_calloc(sizeof(char *), data->map->height +1);
 	x = 0;
+	start = data->map->start_line;
+	map = ft_calloc(sizeof(char *), data->map->height + 1);
+	if (!map)
+		exit_free(data, MERROR);
 	while (start < data->map->nb_lines)
 	{
 		y = 0;
 		map[x] = ft_calloc(sizeof(char), data->map->width);
-		while (data->map->grid[start][y] != '\n' && y < data->map->width)
+		if (!map[x])
+			exit_free(data, MERROR);
+		while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
+			&& y < data->map->width)
 		{
 			map[x][y] = data->map->grid[start][y];
 			y++;
 		}
-
 		while (y < data->map->width)
 		{
 			map[x][y] = ' ';
