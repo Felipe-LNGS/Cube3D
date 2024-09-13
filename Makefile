@@ -40,7 +40,7 @@ all: $(NAME)
 -include $(DEPS)
 
 .c.o:
-	@printf "\r\033[K[cube3D] \033[0;32mBuilding : $<\033[0m"
+	@printf "\r\033[K[cube3D] \033[0;32mBuilding : $<\033[0m\n"
 	@$(CC) $(FLAG) -c $< -o $@ -MMD -MP
 
 $(LIBFT_LIB):
