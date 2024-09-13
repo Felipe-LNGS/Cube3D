@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:14:44 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:44:44 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,3 @@ void	exit_free(t_data *data, char *str)
 	free_all(data);
 	exit(1);
 }
-
-// void	free_struct(t_data *data)
-// {
-// 	free_grid2(data->map->grid, data->map->height);
-// 	free_grid2(data->map->tmp_grid, data->map->height);
-// 	// free_img_data(data);
-// 	// if (data->window != NULL)
-// 	// 	mlx_destroy_window(data->mlx, data->window);
-// 	// if (data->mlx != NULL)
-// 	// {
-// 	// 	mlx_destroy_display(data->mlx);
-// 	// 	free(data->mlx);
-// 	// }
-// 	free(data->mlx);
-// 	exit(0);
-// }

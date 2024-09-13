@@ -24,7 +24,7 @@ C_FILE		= 	$(addsuffix .c,						\
 					parse							\
 				)									\
 				$(addprefix srcs/free/, 			\
-									exit_and_free	\
+					exit_and_free					\
 				)									\
 				$(addprefix srcs/init_struct/, 		\
 					init_texture					\

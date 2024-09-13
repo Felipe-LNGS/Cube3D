@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:30:24 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:44:26 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_map
 	int		f_tab[SIZE_TAB];
 	int		c_tab[SIZE_TAB];
 	int		nb_lines;
-	int width;  // map width
-	int height; // map height
+	int		width;  // map width
+	int		height; // map height
 }			t_map;
 
 typedef struct img_s
@@ -66,13 +66,13 @@ typedef struct img_s
 
 typedef struct s_data
 {
-	int posx_p; // x-coordinate start position player on .cub grid
-	int posy_p; // y-coordinate start position player ...
-	int map_x;  // x-coordinate continuous position of player on rendered grid
-	int map_y;  // y-coordinate continuous position of player ...
+	int 	posx_p; // x-coordinate start position player on .cub grid
+	int 	posy_p; // y-coordinate start position player ...
+	int 	map_x;  // x-coordinate continuous position of player on rendered grid
+	int 	map_y;  // y-coordinate continuous position of player ...
 
-	int sizex; // computer display width
-	int sizey; // comupter display height
+	int 	sizex; // computer display width
+	int 	sizey; // comupter display height
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_imgs	*img;
