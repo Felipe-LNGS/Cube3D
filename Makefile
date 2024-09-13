@@ -26,12 +26,13 @@ C_FILE		= 	$(addsuffix .c,						\
 				$(addprefix srcs/free/, 			\
 					exit_and_free					\
 				)									\
-				$(addprefix srcs/init_struct/, 		\
+				$(addprefix srcs/inits/, 			\
 					init_texture					\
-					set_struct_core					\
+					init_struct						\
+					init_raycast					\
 				)									\
 				$(addprefix srcs/raycasting/, 		\
-						raycastingg					\
+						raycasting					\
 				)									\
 				main								\
 				)									\

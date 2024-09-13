@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_struct_core.c                                  :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:22:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/13 17:22:13 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:22:41 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,4 @@ void	init_struct(t_data *data)
 	ft_bzero(map, sizeof(t_map));
 	ft_bzero(data, sizeof(t_data));
 	data->map = map;
-	// data->win_ptr = NULL;
-	// data->posx_p = 0;
-	// data->posy_p = 0;
 }

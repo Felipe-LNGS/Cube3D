@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 10:53:50 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 17:12:54 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:22:52 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
-
-
 
 static void	load_xpm(t_data *data, t_imgs *img, char *tex)
 {
