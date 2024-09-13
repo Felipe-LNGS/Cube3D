@@ -25,7 +25,7 @@ C_FILE		= 	$(addsuffix .c,						\
 				$(addprefix free/, 					\
 									exit_and_free	\
 				)									\
-				$(addprefix srcs/init_struct, 		\
+				$(addprefix srcs/init_struct/, 		\
 					init_struct_mlx				\
 					set_struct_core					\
 				)									\

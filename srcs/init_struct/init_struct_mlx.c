@@ -6,13 +6,13 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 10:53:50 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:55:20 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:05:14 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-void	init_texture(t_data *data)
-{
+// void	init_texture(t_data *data)
+// {
 	
-}
+// }
