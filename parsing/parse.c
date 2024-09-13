@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 17:10:57 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 09:58:52 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,21 @@ void	check_is_close(t_data *data)
 				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
 					|| y == data->map->width - 1)
 				{
+<<<<<<< HEAD
 					exit_free(data, "Map not closed: character on the edge.");
+=======
+				exit_free(data, "Map not closed: character on the edge");
+					
+			
+>>>>>>> main
 				}
 				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
 						- 1 >= 0 && map[x - 1][y] == ' ') || (y
 						+ 1 < data->map->width && map[x][y + 1] == ' ') || (y
 						- 1 >= 0 && map[x][y - 1] == ' '))
 				{
-					ft_printf(RED "Map not closed: adjacent to empty space\n" RESET);
+				exit_free(data, "Map not closed: adjacent to empty space");
+					
 				}
 			}
 			y++;
