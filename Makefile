@@ -31,7 +31,7 @@ C_FILE		= 	$(addsuffix .c,						\
 					set_struct_core					\
 				)									\
 				$(addprefix srcs/raycasting/, 		\
-						prout						\
+						raycastingg					\
 				)									\
 				main								\
 				)									\
