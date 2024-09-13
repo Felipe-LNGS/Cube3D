@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 13:40:52 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:30:24 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void		exit_free(t_data *data, char *str);
 /*--------------------MLX--------------------*/
 void		initiate_mlx(t_data *data);
 void		init_texture(t_data *data);
+void    init_struct(t_data *data);
 
 #endif

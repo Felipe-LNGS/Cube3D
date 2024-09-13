@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_struct_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:22:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/13 13:34:18 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:30:13 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,16 @@ void	initiate_mlx(t_data *data)
 			"CUB3D");
 	if (!data->win_ptr)
 		exit_free(data, "MLX error");
+}
+
+void    init_struct(t_data *data)
+{
+    t_map   map;
+    
+    ft_bzero(&map, sizeof(t_map));
+    ft_bzero(data, sizeof(t_data));
+    data->map = &map;
+    data->win_ptr = NULL;
+    data->posx_p = 0;
+    data->posy_p = 0;
 }
