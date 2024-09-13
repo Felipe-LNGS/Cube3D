@@ -6,11 +6,11 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:43:22 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:50:59 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../../include/cube.h"
 
 void	check_valid_char(t_data *data)
 {

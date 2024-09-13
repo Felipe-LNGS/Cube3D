@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_struct_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:22:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 14:44:32 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/13 10:54:05 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../../include/cube.h"
 
 void	initiate_mlx(t_data *data)
 {

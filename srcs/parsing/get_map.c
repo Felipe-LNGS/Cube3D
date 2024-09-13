@@ -6,11 +6,11 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:43:55 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:50:54 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../../include/cube.h"
 
 // Verifie le format du fichier qui essaye d'etre ouvert
 int	check_format(char *map)

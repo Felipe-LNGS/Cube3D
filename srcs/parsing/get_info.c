@@ -6,11 +6,11 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:30:11 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:50:44 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../../include/cube.h"
 
 void	stock_info_bis(char *line, t_data *data)
 {
