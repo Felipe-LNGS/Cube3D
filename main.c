@@ -13,7 +13,10 @@ int	main(int ac, char **av)
 		get_height(av[1], &data);
 		read_map(av[1], &data);
 		parse_map(&data);
-		free_all(&data);
+		initiate_mlx(&data);
+		init_texture(&data);
+		mlx_loop(data.mlx_ptr);
+		exit_free(&data, "FIN");
 		// print_map(&data);
 	}
 	// free_grid(&data);

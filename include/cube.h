@@ -6,17 +6,25 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/12 17:24:38 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:40:52 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
 
-# include <math.h>
 # include "../.libft/libft.h"
 # include "../.minilibx-linux/mlx.h"
-#define SIZE_TAB 3
+# include <math.h>
+
+# define SIZE_IMG 64
+# define SIZE_TAB 3
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+# define SCREEN_W 1280
+# define SCREEN_H 720
 # define MERROR "Error : malloc"
 
 typedef struct s_map
@@ -35,36 +43,39 @@ typedef struct s_map
 	int		f_tab[SIZE_TAB];
 	int		c_tab[SIZE_TAB];
 	int		nb_lines;
-	int		width;		//map width
-	int		height;		//map height
+	int width;  // map width
+	int height; // map height
 }			t_map;
 
 typedef struct img_s
 {
 	int		height;
 	int		width;
-	
+	void	*img;
+	int		*addr;
+	int		pixel_bits;
+	int		line_len;
+	int		endian;
 	// void	*img_wall;
 	// void	*img_path;
 	// char	*wall;
 	// char	*path;
+	int		**texture;
 
 }			t_imgs;
 
 typedef struct s_data
 {
-	int		fd;
-	int		posx_p;	//x-coordinate start position player on .cub grid
-	int		posy_p;	//y-coordinate start position player ...
-	int		map_x; 	//x-coordinate continuous position of player on rendered grid
-	int		map_y; 	//y-coordinate continuous position of player ...
+	int posx_p; // x-coordinate start position player on .cub grid
+	int posy_p; // y-coordinate start position player ...
+	int map_x;  // x-coordinate continuous position of player on rendered grid
+	int map_y;  // y-coordinate continuous position of player ...
 
-
-	int		sizex; 	//computer display width
-	int		sizey; 	//comupter display height
-	void	*window;
-	void	*mlx;
-	// t_imgs	img;
+	int sizex; // computer display width
+	int sizey; // comupter display height
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_imgs	*img;
 	t_map	*map;
 }			t_data;
 
@@ -88,13 +99,9 @@ void		parse_map(t_data *data);
 /*-------------------UTILS-------------------*/
 char		*ft_strducube(char *s, t_data *data);
 /*--------------------FREE--------------------*/
-void		free_all(t_data *data);
-void		free_map(t_data *data);
-void		free_grid(t_data *data);
-void		free_grid2(char **grid, int height);
-void		free_struct(t_data *data);
 void		exit_free(t_data *data, char *str);
 /*--------------------MLX--------------------*/
 void		initiate_mlx(t_data *data);
+void		init_texture(t_data *data);
 
 #endif

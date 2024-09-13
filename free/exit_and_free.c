@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:44:06 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:28:04 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,56 @@ void	free_map(t_data *data)
 	if (data->map->c)
 		free(data->map->c);
 }
-
+void	free_img(t_data *data)
+{
+	if (data->img->img)
+		free(data->img->img);
+	if(data->img->addr)
+		free(data->img->addr);
+	if(data->img->texture)
+	{
+		if(data->img->texture[NO])
+			free(data->img->texture[NO]);
+		if(data->img->texture[SO])
+			free(data->img->texture[SO]);
+		if(data->img->texture[WE])
+			free(data->img->texture[WE]);
+		if(data->img->texture[EA])
+			free(data->img->texture[EA]);
+	}
+}
 void	free_all(t_data *data)
 {
+	free_img(data);
 	free_map(data);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
 }
 
 void	exit_free(t_data *data, char *str)
 {
 	ft_printf(RED "%s\n" RESET, str);
-	free_map(data);
+	free_all(data);
 	exit(1);
 }
 
-void	free_struct(t_data *data)
-{
-	free_grid2(data->map->grid, data->map->height);
-	free_grid2(data->map->tmp_grid, data->map->height);
-	// free_img_data(data);
-	// if (data->window != NULL)
-	// 	mlx_destroy_window(data->mlx, data->window);
-	// if (data->mlx != NULL)
-	// {
-	// 	mlx_destroy_display(data->mlx);
-	// 	free(data->mlx);
-	// }
-	free(data->mlx);
-	exit(0);
-}
+// void	free_struct(t_data *data)
+// {
+// 	free_grid2(data->map->grid, data->map->height);
+// 	free_grid2(data->map->tmp_grid, data->map->height);
+// 	// free_img_data(data);
+// 	// if (data->window != NULL)
+// 	// 	mlx_destroy_window(data->mlx, data->window);
+// 	// if (data->mlx != NULL)
+// 	// {
+// 	// 	mlx_destroy_display(data->mlx);
+// 	// 	free(data->mlx);
+// 	// }
+// 	free(data->mlx);
+// 	exit(0);
+// }

@@ -16,7 +16,7 @@ MLX_EX      =   $(MLX_LIB) $(MLX_FLAGS)
 LIBFT_LIB   =   $(LIBFT_PATH)/$(LIBFT_FILE)
 
 C_FILE		= 	$(addsuffix .c,						\
-				$(addprefix srcs/parsing/, 		\
+				$(addprefix srcs/parsing/, 			\
 					utils_parse						\
 					get_map							\
 					get_info						\
@@ -26,7 +26,7 @@ C_FILE		= 	$(addsuffix .c,						\
 									exit_and_free	\
 				)									\
 				$(addprefix srcs/init_struct/, 		\
-					init_struct_mlx				\
+					init_texture					\
 					set_struct_core					\
 				)									\
 				main								\
