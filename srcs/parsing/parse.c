@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:50:59 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:35:47 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	check_valid_char(t_data *data)
 				exit_free(data, "Invalid character need to put only 01NSEW");
 			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
 			{
-				data->posx_p = x;
-				data->posy_p = y;
+				data->posx_p = (double)x + 0.5;
+				data->posy_p = (double)y + 0.5;
 				nb_start++;
 			}
 			y++;
@@ -69,28 +69,50 @@ void	check_is_close(t_data *data)
 		}
 	}
 }
-
+static void	set_plane(t_data *data, char who)
+{
+	if (who == 'N')
+	{
+		data->plane_x = 0.66;
+		data->plane_y = 0;
+	}
+	if (who == 'S')
+	{
+		data->plane_x = -0.66;
+		data->plane_y = 0;
+	}
+	if (who == 'E')
+	{
+		data->plane_x = 0;
+		data->plane_y = 0.66;
+	}
+	if (who == 'W')
+	{
+		data->plane_x = 0;
+		data->plane_y = -0.66;
+	}
+}
 static void	set_dir(t_data *data, char who)
 {
 	if (who == 'N')
 	{
-		data->map_x = 0;
-		data->map_y = 1;
+		data->dir_x = 0;
+		data->dir_y = 1;
 	}
 	if (who == 'S')
 	{
-		data->map_x = 0;
-		data->map_y = -1;
+		data->dir_x = 0;
+		data->dir_y = -1;
 	}
 	if (who == 'E')
 	{
-		data->map_x = 1;
-		data->map_y = 0;
+		data->dir_x = 1;
+		data->dir_y = 0;
 	}
 	if (who == 'W')
 	{
-		data->map_x = -1;
-		data->map_y = 0;
+		data->dir_x = -1;
+		data->dir_y = 0;
 	}
 }
 
@@ -107,14 +129,11 @@ void	get_pos(t_data *data)
 		y = 0;
 		while (y < data->map->width)
 		{
-			if (ft_strchr("N", map[x][y]))
-				set_dir(data, 'N');
-			if (ft_strchr("E", map[x][y]))
-				set_dir(data, 'E');
-			if (ft_strchr("S", map[x][y]))
-				set_dir(data, 'S');
-			if (ft_strchr("W", map[x][y]))
-				set_dir(data, 'W');
+			if (ft_strchr("NSEW", map[x][y]))
+			{
+				set_dir(data, map[x][y]);
+				set_plane(data, map[x][y]);
+			}
 			y++;
 		}
 		x++;
@@ -158,6 +177,8 @@ void	parse_map(t_data *data)
 	check_valid_char(data);
 	check_is_close(data);
 	get_pos(data);
+	printf("pos x[%f]\n", data->posx_p);
+	printf("pos y[%f]\n", data->posy_p);
 	split_rgb(data, data->map->f, 'F');
 	split_rgb(data, data->map->c, 'C');
 }

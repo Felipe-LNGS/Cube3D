@@ -6,20 +6,17 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 10:53:50 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 14:23:24 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:12:54 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-void	init_img(t_imgs *img)
-{
-	ft_bzero(img, sizeof(t_imgs));
-}
+
 
 static void	load_xpm(t_data *data, t_imgs *img, char *tex)
 {
-	init_img(img);
+	ft_bzero(img, sizeof(t_imgs));
 	printf("w[%d]h[%d]",data->map->width, data->map->height);
 	printf("Loading texture from: [%s]\n", tex);
 

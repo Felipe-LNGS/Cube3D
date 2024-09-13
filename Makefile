@@ -30,6 +30,9 @@ C_FILE		= 	$(addsuffix .c,						\
 					init_texture					\
 					set_struct_core					\
 				)									\
+				$(addprefix srcs/raycasting/, 		\
+						raycastingg					\
+				)									\
 				main								\
 				)									\
 

@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:44:26 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:22:29 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,17 @@ typedef struct img_s
 
 typedef struct s_data
 {
-	int 	posx_p; // x-coordinate start position player on .cub grid
-	int 	posy_p; // y-coordinate start position player ...
-	int 	map_x;  // x-coordinate continuous position of player on rendered grid
-	int 	map_y;  // y-coordinate continuous position of player ...
-
-	int 	sizex; // computer display width
-	int 	sizey; // comupter display height
+	double posx_p; // x-coordinate start position player on .cub grid
+	double posy_p; // y-coordinate start position player ...
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
+	double map_x;  // x-coordinate continuous position of player on rendered grid
+	double map_y;  // y-coordinate continuous position of player ...
+	
+	int sizex; // computer display width
+	int sizey; // comupter display height
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_imgs	*img;
@@ -104,5 +108,4 @@ void		exit_free(t_data *data, char *str);
 void		initiate_mlx(t_data *data);
 void		init_texture(t_data *data);
 void    init_struct(t_data *data);
-
 #endif
