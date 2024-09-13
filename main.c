@@ -13,6 +13,7 @@ int	main(int ac, char **av)
 		get_height(av[1], &data);
 		read_map(av[1], &data);
 		parse_map(&data);
+		free_all(&data);
 		// print_map(&data);
 	}
 	// free_grid(&data);
