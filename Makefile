@@ -22,7 +22,7 @@ C_FILE		= 	$(addsuffix .c,						\
 					get_info						\
 					parse							\
 				)									\
-				$(addprefix free/, 					\
+				$(addprefix srcs/free/, 					\
 									exit_and_free	\
 				)									\
 				$(addprefix srcs/init_struct/, 		\
