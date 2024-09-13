@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 09:58:52 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:01:21 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,30 @@ void	check_valid_char(t_data *data)
 	int	x;
 	int	y;
 	int	nb_start;
-	
+
 	nb_start = 0;
 	x = 0;
 	while (x < data->map->height)
 	{
 		y = 0;
-		while (y < data->map->width )
+		while (y < data->map->width)
 		{
 			if ((ft_strchr(" 01NSEW", data->map->tmp_grid[x][y]) == NULL))
 			{
 				exit_free(data, "Invalid character need to put only 01NSEW");
-			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
-			{
-				data->posx_p = x;
-				data->posy_p = y;
-				nb_start++;
+				if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
+				{
+					data->posx_p = x;
+					data->posy_p = y;
+					nb_start++;
+				}
+				y++;
 			}
-			y++;
+			if (nb_start > 1)
+				exit_free(data, "Error: more than one start position found.");
+			x++;
 		}
-		if (nb_start > 1)
-			exit_free(data, "Error: more than one start position found.");
-		x++;
 	}
-}
 }
 
 void	check_is_close(t_data *data)
@@ -50,8 +50,8 @@ void	check_is_close(t_data *data)
 	char	**map;
 
 	map = data->map->tmp_grid;
-	x = 0;
-	while (x < data->map->height)
+	x = -1;
+	while (++x < data->map->height)
 	{
 		y = 0;
 		while (y < data->map->width)
@@ -60,29 +60,18 @@ void	check_is_close(t_data *data)
 			{
 				if (x == 0 || x == data->map->nb_lines - 1 || y == 0
 					|| y == data->map->width - 1)
-				{
-<<<<<<< HEAD
 					exit_free(data, "Map not closed: character on the edge.");
-=======
-				exit_free(data, "Map not closed: character on the edge");
-					
-			
->>>>>>> main
-				}
 				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
 						- 1 >= 0 && map[x - 1][y] == ' ') || (y
 						+ 1 < data->map->width && map[x][y + 1] == ' ') || (y
 						- 1 >= 0 && map[x][y - 1] == ' '))
-				{
-				exit_free(data, "Map not closed: adjacent to empty space");
-					
-				}
+					exit_free(data, "Map not closed: adjacent to empty space");
 			}
 			y++;
 		}
-		x++;
 	}
 }
+
 void	set_dir(t_data *data, char who)
 {
 	if (who == 'N')
@@ -106,6 +95,7 @@ void	set_dir(t_data *data, char who)
 		data->map_y = 0;
 	}
 }
+
 void	get_pos(t_data *data)
 {
 	int		x;
@@ -132,6 +122,7 @@ void	get_pos(t_data *data)
 		x++;
 	}
 }
+
 void	find_start_line(t_data *data)
 {
 	int	i;
@@ -164,11 +155,11 @@ void	parse_map(t_data *data)
 	// printf("w [%s]\n", data->map->west_path);
 	// printf("f [%s]\n", data->map->f);
 	// printf("c [%s]\n", data->map->c);
+	// printf("f path[%s]\n", data->map->f);
+	// printf("c path[%s]\n", data->map->c);
 	check_valid_char(data);
 	check_is_close(data);
 	get_pos(data);
-	printf("f path[%s]\n", data->map->f);
-	printf("c path[%s]\n", data->map->c);
 	split_rgb(data, data->map->f, 'F');
 	split_rgb(data, data->map->c, 'C');
 }
