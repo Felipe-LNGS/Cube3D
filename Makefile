@@ -2,13 +2,14 @@ NAME        =   cube3D
 
 CC          =   cc
 
-FLAG        =   -Wall -Wextra -Werror -g3
+FLAG        =   -Wall -Wextra -Werror -g3 -I/opt/X11/include
 
 LIBFT_PATH  =   .libft
 LIBFT_FILE  =   libft.a
 
 MLX_FILE    =   libmlx.a
-MLX_FLAGS   =   -lX11 -lXext -fPIE
+MLX_FLAGS   =   -lXext -fPIE -L/opt/X11/lib -lX11
+
 MLX_PATH    =   ./.minilibx-linux
 MLX_LIB     =   $(MLX_PATH)/$(MLX_FILE)
 MLX_EX      =   $(MLX_LIB) $(MLX_FLAGS)
@@ -22,7 +23,7 @@ C_FILE		= 	$(addsuffix .c,						\
 					get_info						\
 					parse							\
 				)									\
-				$(addprefix srcs/free/, 					\
+				$(addprefix srcs/free/, 			\
 									exit_and_free	\
 				)									\
 				$(addprefix srcs/init_struct/, 		\

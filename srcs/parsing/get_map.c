@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:50:54 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:14:38 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	open_file(t_data *data, char *filename)
 {
 	int	fd;
 
-	fd = open(filename, __O_DIRECTORY);
+	fd = open(filename, O_DIRECTORY);
 	if (fd > 0)
 	{
 		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
