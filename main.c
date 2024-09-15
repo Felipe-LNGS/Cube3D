@@ -12,9 +12,10 @@ int	main(int ac, char **av)
 		parse_map(&data);
 		initiate_mlx(&data);
 		init_texture(&data);
-		mlx_loop(data.mlx_ptr);
+		// raycast(&data);
+		// mlx_loop(data.mlx_ptr);
+		print_map(&data);
 		exit_free(&data, "FIN");
-		// print_map(&data);
 	}
 	// free_grid(&data);
 	// free(data);

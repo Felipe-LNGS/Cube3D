@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 18:12:18 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:46:27 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	check_valid_char(t_data *data)
 				exit_free(data, "Invalid character need to put only 01NSEW");
 			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
 			{
-				data->posx_p = (double)x + 0.5;
-				data->posy_p = (double)y + 0.5;
+				data->pos[X] = (double)x + 0.5;
+				data->pos[Y] = (double)y + 0.5;
 				nb_start++;
 			}
 			y++;
@@ -107,8 +107,8 @@ void	parse_map(t_data *data)
 	check_valid_char(data);
 	check_is_close(data);
 	get_pos(data);
-	printf("pos x[%f]\n", data->posx_p);
-	printf("pos y[%f]\n", data->posy_p);
+	printf("pos x[%f]\n", data->pos[X]);
+	printf("pos y[%f]\n", data->pos[Y]);
 	split_rgb(data, data->map->f, 'F');
 	split_rgb(data, data->map->c, 'C');
 }

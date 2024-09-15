@@ -4,50 +4,50 @@
 static void	set_plane(t_data *data)
 {
 
-    data->plane_x = data->dir_y * (-1) * 0.66;
-    data->plane_y = data->dir_x * 0.66;
+    data->plane[X] = data->dir[Y] * (-1) * 0.66;
+    data->plane[Y] = data->dir[X] * 0.66;
 	// if (who == 'N')
 	// {
-	// 	data->plane_x = 0.66;
-	// 	data->plane_y = 0;
+	// 	data->plane[X] = 0.66;
+	// 	data->plane[Y] = 0;
 	// }
 	// if (who == 'S')
 	// {
-	// 	data->plane_x = -0.66;
-	// 	data->plane_y = 0;
+	// 	data->plane[X] = -0.66;
+	// 	data->plane[Y] = 0;
 	// }
 	// if (who == 'E')
 	// {
-	// 	data->plane_x = 0;
-	// 	data->plane_y = 0.66;
+	// 	data->plane[X] = 0;
+	// 	data->plane[Y] = 0.66;
 	// }
 	// if (who == 'W')
 	// {
-	// 	data->plane_x = 0;
-	// 	data->plane_y = -0.66;
+	// 	data->plane[X] = 0;
+	// 	data->plane[Y] = -0.66;
 	// }
 }
 static void	set_dir(t_data *data, char who)
 {
 	if (who == 'N')
 	{
-		data->dir_x = 0;
-		data->dir_y = 1;
+		data->dir[X] = 0;
+		data->dir[Y] = 1;
 	}
 	if (who == 'S')
 	{
-		data->dir_x = 0;
-		data->dir_y = -1;
+		data->dir[X] = 0;
+		data->dir[Y] = -1;
 	}
 	if (who == 'E')
 	{
-		data->dir_x = 1;
-		data->dir_y = 0;
+		data->dir[X] = 1;
+		data->dir[Y] = 0;
 	}
 	if (who == 'W')
 	{
-		data->dir_x = -1;
-		data->dir_y = 0;
+		data->dir[X] = -1;
+		data->dir[Y] = 0;
 	}
 }
 

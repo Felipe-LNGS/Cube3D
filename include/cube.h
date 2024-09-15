@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 19:14:46 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/15 12:12:08 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "../.libft/libft.h"
 # include "../.minilibx-linux/mlx.h"
+#include <sys/time.h>
 # include <math.h>
+
 
 # define SIZE_IMG 64
 # define SIZE_TAB 3
@@ -23,9 +25,25 @@
 # define SO 1
 # define WE 2
 # define EA 3
+# define X	0
+# define Y	1
 # define SCREEN_W 1280
 # define SCREEN_H 720
 # define MERROR "Error : malloc"
+
+typedef struct {
+    int r;  // Red component
+    int g;  // Green component
+    int b;  // Blue component
+} ColorRGB;
+
+extern const ColorRGB RGB_Red;
+extern const ColorRGB RGB_Green;
+extern const ColorRGB RGB_Blue;
+extern const ColorRGB RGB_White;
+extern const ColorRGB RGB_Yellow;
+
+// colors.c
 
 typedef struct s_map
 {
@@ -66,32 +84,21 @@ typedef struct img_s
 
 typedef struct s_data
 {	
-	double 	posx_p; 		// x-coordinate start position player on .cub grid
-	double 	posy_p; 		// y-coordinate start position player ...
-	double 	dir_x;
-	double 	dir_y;
-	double 	plane_x;
-	double 	plane_y;
+	double 	pos[2]; 		// xy-coordinate start position player on .cub grid
+	double 	dir[2];			// vecteur de direction initiale
+	double 	plane[2];		// la version 2d raycaster du plan de camera
 		
-	int 	map_x;  		// x-coordinate of current square of the map the ray is in
-	int 	map_y;  		// y-coordinate ...
-	double 	camerax;   		// x-coordinate of point on camera plane
-	double 	ray_dir_x;		//exact poisition of ray in 
-	double 	ray_dir_y;		// ...
-	// double	ray_dist_x;
-	// double	ray_dist_y;
-	double 	delta_dist_x;	//distance the ray has to travel to go from 1 x-unit to the next x-unit
-	double 	delta_dist_y;	// ...
-	double	unit_dist_x;	//dist the ray has to travel from its start position to the first x-unit
-	double	unit_dist_y;	// ...
-    int 	step_x;			//what direction to step in x or y-direction (either +1 or -1)
-    int 	step_y;
+	int 	map_p[2];  		// xy-coordinate of current square of the map the ray is in
+	double 	camerax;   		// xy-coordinate of point on camera plane
+	double 	ray_dir[2];		//exact poisition of ray in grid
+	// double	ray_dist[2];
+	double 	ddist[2];		//distance the ray has to travel to go from 1 x-unit to the next x-unit
+	double	unit_dist[2];	//dist the ray has to travel from its start position to the first x-unit
+    int 	step[2];		//what direction to step in x or y-direction (either +1 or -1)
 	int 	hit;			//was there a wall hit?
 	int 	side;			//was a NS or a EW wall hit?
 
 	
-	int		sizex;			// computer display width
-	int		sizey;			// comupter display height
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_imgs	*img;
@@ -124,4 +131,7 @@ void		exit_free(t_data *data, char *str);
 void		initiate_mlx(t_data *data);
 void		init_texture(t_data *data);
 void    	init_struct(t_data *data);
+/*-----------------RAYCASTING----------------*/
+void    raycast(t_data *data);
+
 #endif

@@ -33,6 +33,7 @@ C_FILE		= 	$(addsuffix .c,						\
 				)									\
 				$(addprefix srcs/raycasting/, 		\
 						raycasting					\
+						color						\
 				)									\
 				main								\
 				)									\

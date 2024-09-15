@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 10:51:03 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/15 12:17:35 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	print_map(t_data *data)
 		while (j < data->map->width)
 		{
 			ft_printf("%c", data->map->tmp_grid[i][j]);
+			printf(RED"OK"RESET);
+
 			j++;
 		}
 		i++;
