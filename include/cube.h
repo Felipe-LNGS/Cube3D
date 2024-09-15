@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/15 12:12:08 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/15 23:54:16 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <math.h>
 
 
-# define SIZE_IMG 64
 # define SIZE_TAB 3
 # define NO 0
 # define SO 1
@@ -29,6 +28,7 @@
 # define Y	1
 # define SCREEN_W 1280
 # define SCREEN_H 720
+# define SIZE_IMG 64
 # define MERROR "Error : malloc"
 
 typedef struct {
@@ -65,12 +65,12 @@ typedef struct s_map
 	int		height; 	// map height
 }			t_map;
 
-typedef struct img_s
+typedef struct s_img
 {
 	int		height;
 	int		width;
-	void	*img;
-	int		*addr;
+	void	*mlx_ptr;
+	int		*addr_ptr;
 	int		pixel_bits;
 	int		line_len;
 	int		endian;
@@ -93,12 +93,23 @@ typedef struct s_data
 	double 	ray_dir[2];		//exact poisition of ray in grid
 	// double	ray_dist[2];
 	double 	ddist[2];		//distance the ray has to travel to go from 1 x-unit to the next x-unit
-	double	unit_dist[2];	//dist the ray has to travel from its start position to the first x-unit
+	double	side_dist[2];	//dist the ray has to travel from its start position to the first x-unit
     int 	step[2];		//what direction to step in x or y-direction (either +1 or -1)
 	int 	hit;			//was there a wall hit?
 	int 	side;			//was a NS or a EW wall hit?
+	double	perpwalldist;
+	int		line_h;
+	int		line_w;
+	int		draw_start;
+	int		draw_end;
+	int		y;
+	int		color;
 
-	
+	double	wallx;			//exact value where the wall was hit
+	int		tex[2];			//x-coordinate of the texture
+	int		texstep;
+	int		texpos;
+	int 	texnum;			//value of the current map square minus 1
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_imgs	*img;
@@ -132,6 +143,8 @@ void		initiate_mlx(t_data *data);
 void		init_texture(t_data *data);
 void    	init_struct(t_data *data);
 /*-----------------RAYCASTING----------------*/
-void    raycast(t_data *data);
+void    	raycast(t_data *data);
+
+void		print_tmp_grid(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:22:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/13 18:22:41 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:09:36 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	initiate_mlx(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		exit_free(data, "MLX error");
-	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREEN_W, SCREEN_H, "CUB3D");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREEN_W, SCREEN_H, "RubiksCub3D");
 	if (!data->win_ptr)
 		exit_free(data, "MLX error");
 }

@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:44:44 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:04:06 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,27 @@ void	free_map(t_data *data)
 	if (data->map->c)
 		free(data->map->c);
 }
-void	free_img(t_data *data)
-{
-	if (data->img->img)
-		free(data->img->img);
-	if(data->img->addr)
-		free(data->img->addr);
-	if(data->img->texture)
-	{
-		if(data->img->texture[NO])
-			free(data->img->texture[NO]);
-		if(data->img->texture[SO])
-			free(data->img->texture[SO]);
-		if(data->img->texture[WE])
-			free(data->img->texture[WE]);
-		if(data->img->texture[EA])
-			free(data->img->texture[EA]);
-	}
-}
+// void	free_img(t_data *data)
+// {
+// 	if (data->img->img)
+// 		free(data->img->img);
+// 	if(data->img->addr)
+// 		free(data->img->addr);
+// 	if(data->img->texture)
+// 	{
+// 		if(data->img->texture[NO])
+// 			free(data->img->texture[NO]);
+// 		if(data->img->texture[SO])
+// 			free(data->img->texture[SO]);
+// 		if(data->img->texture[WE])
+// 			free(data->img->texture[WE]);
+// 		if(data->img->texture[EA])
+// 			free(data->img->texture[EA]);
+// 	}
+// }
 void	free_all(t_data *data)
 {
-	free_img(data);
+	// free_img(data);
 	free_map(data);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
