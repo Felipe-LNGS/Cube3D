@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:22:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/15 18:09:36 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:04:33 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	initiate_mlx(t_data *data)
 void	init_struct(t_data *data)
 {
 	t_map	*map;
+	t_imgs	*img;
 
 	map = ft_calloc(1, sizeof(t_map));
 	if(!map)

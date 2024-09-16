@@ -2,7 +2,7 @@ NAME        =   cube3D
 
 CC          =   cc
 
-FLAG        =   -Wall -Wextra -Werror -fsanitize=address -g3 -I/opt/X11/include
+FLAG        =   -Wall -Wextra -Werror -g3 -I/opt/X11/include
 
 LIBFT_PATH  =   .libft
 LIBFT_FILE  =   libft.a
@@ -32,8 +32,8 @@ C_FILE		= 	$(addsuffix .c,						\
 					init_raycast					\
 				)									\
 				$(addprefix srcs/raycasting/, 		\
-						raycasting					\
-						color						\
+					raycasting						\
+					color							\
 				)									\
 				main								\
 				)									\
@@ -58,7 +58,7 @@ $(MLX_LIB):
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
 	@printf "\r\033[K[cube3D] \033[0;32mLinking...\033[0m"
-	@$(CC) $(OBJS) $(LIBFT_LIB) $(MLX_EX) -o $(NAME) -lm -fsanitize=address
+	@$(CC) $(OBJS) $(LIBFT_LIB) $(MLX_EX) -o $(NAME) -lm
 	@printf "\r\033[K[cube3D] \033[0;32mDone!\033[0m\n"
 
 clean:
