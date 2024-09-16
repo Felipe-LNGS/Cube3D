@@ -31,9 +31,12 @@ C_FILE		= 	$(addsuffix .c,						\
 					init_struct						\
 					init_raycast					\
 				)									\
+				$(addprefix srcs/movement/, 		\
+					mov								\
+					mov2							\
+				)									\
 				$(addprefix srcs/raycasting/, 		\
 					raycasting						\
-					color							\
 				)									\
 				main								\
 				)									\

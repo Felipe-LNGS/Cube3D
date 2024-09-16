@@ -6,7 +6,7 @@
 /*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/16 11:10:25 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:38:42 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,24 @@ void	bzero_img(t_imgs *img)
 }
 
 // fill addr and xpm file to img
-static void	load_xpm(t_data *data, t_imgs *img, char *tex)
+static void	load_xpm(t_data *data, t_imgs *tmp, char *tex)
 {
-	bzero_img(data->img);
-	img->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, tex, &data->img->width,
-			&data->img->height);
-	if (!img->mlx_img)
+	bzero_img(tmp);
+	tmp->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, tex, &tmp->width, &tmp->height);
+	if (!tmp->mlx_img)
 		exit_free(data, MERROR);
-	printf("w[%d]h[%d] :", data->img->width, data->img->height);
-	printf("Loading texture from: [%s]\n", tex);
-	img->addr_ptr = (int *)mlx_get_data_addr(img->mlx_img, &img->pixel_bits,
-			&img->line_len, &img->endian);
+	
+	tmp->addr_ptr = (int *)mlx_get_data_addr(tmp->mlx_img, &tmp->pixel_bits, &tmp->line_len, &tmp->endian);
 }
 
 // load texture from an XPM image file into a 1D integer array
 static int	*fill_texture_tab(t_data *data, char *tex)
 {
-	int	x;
-	int	y;
-
-	t_imgs tmp; // struct for given image
-	int *tab;   // tab stock xpm
+	int		x;
+	int		y;
+	t_imgs 	tmp; 	// struct for given image
+	int 	*tab;   // tab stock xpm
+	
 	load_xpm(data, &tmp, tex);
 	tab = ft_calloc(1, sizeof(int) * (SIZE_IMG * SIZE_IMG));
 	if (!tab)
@@ -55,7 +52,7 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 		y = 0;
 		while (y < SIZE_IMG)
 		{
-			tab[x * SIZE_IMG + y] = tmp->addr_ptr[x * SIZE_IMG + y];
+			tab[x * SIZE_IMG + y] = tmp.addr_ptr[x * SIZE_IMG + y];
 			y++;
 		}
 		x++;
@@ -64,14 +61,13 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 	return (tab);
 }
 
-void	init_texture(t_data *data)
+void	init_texture(t_data *data, t_imgs *img)
 {
-	data->img->texture = ft_calloc(5, sizeof(int *));
-	if (!data->img->texture)
+	img->texture = ft_calloc(5, sizeof(int *));
+	if (!img->texture)
 		exit_free(data, MERROR);
-	data->img->texture[NO] = fill_texture_tab(data, data->map->north_path);
-	data->img->texture[SO] = fill_texture_tab(data, data->map->south_path);
-	data->img->texture[WE] = fill_texture_tab(data, data->map->west_path);
-	data->img->texture[EA] = fill_texture_tab(data, data->map->east_path);
-	printf(GREEN "Textures loaded\n" RESET);
+	img->texture[NO] = fill_texture_tab(data, data->map->north_path);
+	img->texture[SO] = fill_texture_tab(data, data->map->south_path);
+	img->texture[WE] = fill_texture_tab(data, data->map->west_path);
+	img->texture[EA] = fill_texture_tab(data, data->map->east_path);
 }

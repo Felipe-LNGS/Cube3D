@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 10:48:28 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:09:48 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../.libft/libft.h"
 # include "../.minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 #include <sys/time.h>
 # include <math.h>
 
@@ -30,6 +32,8 @@
 # define SCREEN_H 720
 # define SIZE_IMG 64
 # define MERROR "Error : malloc"
+# define P_SPEED 0.03
+# define R_SPEED 0.04
 
 typedef struct {
     int r;  // Red component
@@ -74,12 +78,7 @@ typedef struct s_img
 	int		pixel_bits;
 	int		line_len;
 	int		endian;
-	// void	*img_wall;
-	// void	*img_path;
-	// char	*wall;
-	// char	*path;
 	int		**texture;
-
 }			t_imgs;
 
 typedef struct s_data
@@ -87,11 +86,9 @@ typedef struct s_data
 	double 	pos[2]; 		// xy-coordinate start position player on .cub grid
 	double 	dir[2];			// vecteur de direction initiale
 	double 	plane[2];		// la version 2d raycaster du plan de camera
-		
 	int 	map_p[2];  		// xy-coordinate of current square of the map the ray is in
 	double 	camerax;   		// xy-coordinate of point on camera plane
 	double 	ray_dir[2];		//exact poisition of ray in grid
-	// double	ray_dist[2];
 	double 	ddist[2];		//distance the ray has to travel to go from 1 x-unit to the next x-unit
 	double	side_dist[2];	//dist the ray has to travel from its start position to the first x-unit
     int 	step[2];		//what direction to step in x or y-direction (either +1 or -1)
@@ -104,7 +101,9 @@ typedef struct s_data
 	int		draw_end;
 	int		y;
 	int		color;
-
+	int		move[2];
+	int 	moved;
+	int		rotate;
 	double	wallx;			//exact value where the wall was hit
 	int		tex[2];			//x-coordinate of the texture
 	int		texstep;
@@ -137,13 +136,19 @@ void		get_pos(t_data *data);
 /*-------------------UTILS-------------------*/
 char		*ft_strducube(char *s, t_data *data);
 /*--------------------FREE--------------------*/
+void	free_all(t_data *data);
 void		exit_free(t_data *data, char *str);
 /*--------------------MLX--------------------*/
 void		initiate_mlx(t_data *data);
-void		init_texture(t_data *data);
+void		init_texture(t_data *data, t_imgs *img);
 void    	init_struct(t_data *data);
 /*-----------------RAYCASTING----------------*/
 void    	raycast(t_data *data);
+int	displaymoves(t_data *data);
+int	moving(t_data *data);
+void    raycast(t_data *data);
+int	l_rotate(t_data *data);
+int	r_rotate(t_data *data);
 
 void		print_tmp_grid(t_data *data);
 

@@ -1,31 +1,31 @@
 
 #include "../../include/cube.h"
 
-static void	set_plane(t_data *data)
+static void	set_plane(t_data *data, char who)
 {
 
-    data->plane[X] = data->dir[Y] * (-1) * 0.66;
-    data->plane[Y] = data->dir[X] * 0.66;
-	// if (who == 'N')
-	// {
-	// 	data->plane[X] = 0.66;
-	// 	data->plane[Y] = 0;
-	// }
-	// if (who == 'S')
-	// {
-	// 	data->plane[X] = -0.66;
-	// 	data->plane[Y] = 0;
-	// }
-	// if (who == 'E')
-	// {
-	// 	data->plane[X] = 0;
-	// 	data->plane[Y] = 0.66;
-	// }
-	// if (who == 'W')
-	// {
-	// 	data->plane[X] = 0;
-	// 	data->plane[Y] = -0.66;
-	// }
+    // data->plane[X] = data->dir[Y] * (-1) * 0.66;
+    // data->plane[Y] = data->dir[X] * 0.66;
+	if (who == 'N')
+	{
+		data->plane[X] = 0.66;
+		data->plane[Y] = 0;
+	}
+	if (who == 'S')
+	{
+		data->plane[X] = -0.66;
+		data->plane[Y] = 0;
+	}
+	if (who == 'E')
+	{
+		data->plane[X] = 0;
+		data->plane[Y] = 0.66;
+	}
+	if (who == 'W')
+	{
+		data->plane[X] = 0;
+		data->plane[Y] = -0.66;
+	}
 }
 static void	set_dir(t_data *data, char who)
 {
@@ -67,7 +67,7 @@ void	get_pos(t_data *data)
 			if (ft_strchr("NSEW", map[x][y]))
 			{
 				set_dir(data, map[x][y]);
-				set_plane(data);
+				set_plane(data, map[x][y]);
 			}
 			y++;
 		}

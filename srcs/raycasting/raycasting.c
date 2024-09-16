@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 11:03:20 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:16:49 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,30 @@ static void	ft_img_addr(t_data *data, int **buffer)
     int     i;
 	int		j;
 	int		index;
-	t_imgs	*img;
+	t_imgs	img;
 
-	img = ft_calloc(1, sizeof(t_imgs));
-	if(!img)
-		exit_free(data, MERROR);
-	img->mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_W, SCREEN_H);
-	img->addr_ptr = (int *)mlx_get_data_addr(img->mlx_img, &img->pixel_bits, &img->line_len, &img->endian);
+	ft_bzero(&img, sizeof(t_imgs));
+	img.mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_W, SCREEN_H);
+	img.addr_ptr = (int *)mlx_get_data_addr(img.mlx_img, &img.pixel_bits, &img.line_len, &img.endian);
     i = 0;
     while (i < SCREEN_H)
 	{
 		j = 0;
 		while (j < SCREEN_W)
 		{
-			index = i * (img->line_len / 4) + j;
+			index = i * (img.line_len / 4) + j;
 			if (buffer[i][j] > 0)
-				img->addr_ptr[index] = buffer[i][j];
+				img.addr_ptr[index] = buffer[i][j];
 			else if (i < SCREEN_H / 2)
-				img->addr_ptr[index] = ft_atoi(data->map->c);
+				img.addr_ptr[index] = data->map->c_color;
 			else
-				img->addr_ptr[index] = ft_atoi(data->map->f);
+				img.addr_ptr[index] = data->map->f_color;
             j++;
 		}
         i++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->mlx_img, 0, 0);
-	mlx_destroy_image(data->mlx_ptr, img->mlx_img);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.mlx_img, 0, 0);
+	mlx_destroy_image(data->mlx_ptr, img.mlx_img);
 }
 
 
@@ -72,10 +70,13 @@ void    raycast(t_data *data)
 		buffer[bufindex] = ft_calloc(SCREEN_W + 1, sizeof(int));
 		if (!buffer[bufindex])
 		{
-			while (++x < bufindex)
+			while (x < bufindex)
+			{
 				free(buffer[bufindex]);
+				x++;
+			}
 			free(buffer);
-			// ft_error(data, MERROR);
+			exit_free(data, MERROR);
 		}
         bufindex++;
 	}
@@ -83,13 +84,13 @@ void    raycast(t_data *data)
     while (x < SCREEN_W)
     {
         //init core vectors
-        data->camerax = 2.0 * x / SCREEN_W - 1;
+        data->camerax = 2.0 * x / (double)SCREEN_W - 1;
         data->ray_dir[X] = data->dir[X] + data->plane[X] * data->camerax;
         data->ray_dir[Y] = data->dir[Y] + data->plane[Y] * data->camerax;         
         
         //init coordinates of box of the map we're in
-        data->map_p[X] = data->pos[X];
-        data->map_p[Y] = data->pos[Y];
+        data->map_p[X] = (int)data->pos[X];
+        data->map_p[Y] = (int)data->pos[Y];
 
         //calculating ddist : length of ray from one x or y-side to next x or y-side
         data->ddist[X] = fabs(1 / data->ray_dir[X]);
@@ -99,7 +100,7 @@ void    raycast(t_data *data)
         if (data->ray_dir[X] < 0)
         {
             data->step[X] = -1;
-            data->side_dist[X] = (data->pos[X] - data->map_p[X]) * data->ddist[X];
+            data->side_dist[X] = ((data->pos[X] - data->map_p[X]) * data->ddist[X]);
         }
         else
         {
@@ -135,11 +136,9 @@ void    raycast(t_data *data)
                 data->side = Y; //hit a y-side axis
             }
             // Check if ray has hit a wall
-            if (ft_atoi(data->map->tmp_grid[data->map_p[X]]) < 0.25 || ft_atoi(data->map->tmp_grid[data->map_p[Y]]) < 0.25
-                || ft_atoi(data->map->tmp_grid[data->map_p[Y]]) > data->map->height - 0.25 || ft_atoi(data->map->tmp_grid[data->map_p[X]]) > data->map->width
-                - 1.25)
-                break ;
-            if (data->map->tmp_grid[data->map_p[X]][data->map_p[Y]] > 0)
+           	if (data->map_p[X] < 0 || data->map_p[Y] < 0 || data->map_p[X] >= data->map->width || data->map_p[Y] >= data->map->height)
+				break;
+            if (data->map->tmp_grid[data->map_p[X]][data->map_p[Y]] == '1')
                 data->hit = 1;
         }
         //Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
@@ -152,11 +151,14 @@ void    raycast(t_data *data)
         data->line_h = (int)(SCREEN_H / data->perpwalldist);
 
         //calculate lowest and highest pixel to fill in current stripe
-        data->draw_start = -data->line_h / 2 + SCREEN_H / 2;
+        data->draw_start = -(data->line_h) / 2 + SCREEN_H / 2;
+		
         if (data->draw_start < 0)
             data->draw_start = 0;
         data->draw_end = data->line_h / 2 + SCREEN_H / 2;
-        if (data->draw_end >= SCREEN_H)
+        
+
+		if (data->draw_end >= SCREEN_H)
             data->draw_end = SCREEN_H - 1;
         
         if (data->side == 0)
@@ -172,9 +174,10 @@ void    raycast(t_data *data)
                 data->texnum = SO;
             else
                 data->texnum = NO;
-        }
+		}
+
         //texturing calculations
-        data->texnum = ft_atoi(&data->map->tmp_grid[data->map_p[X]][data->map_p[Y]]) - 1;
+        // data->texnum = ft_atoi(&data->map->tmp_grid[data->map_p[X]][data->map_p[Y]]);
         
         //calculate value of wallX
         if (data->side == 0)
@@ -199,11 +202,12 @@ void    raycast(t_data *data)
         {
             data->tex[Y] = (int)data->texpos & (SIZE_IMG - 1);
             data->texpos += data->texstep;
-			printf("texture %d\n", data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]]);
+			// printf("data->texnum: %d\n", data->texnum);
+			// printf("texture %d\n", data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]]);
             data->color = data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]];
-            buffer[data->y][x] = data->color;
+            if (data->y >= 0 && data->y < SCREEN_H)
+    			buffer[data->y][x] = data->color;
         }
-
     x++;
     }
     ft_img_addr(data, buffer);
