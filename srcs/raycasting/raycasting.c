@@ -6,7 +6,7 @@
 /*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 16:16:49 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:23:01 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void    raycast(t_data *data)
         // How much to increase the texture coordinate per screen pixel
         data->texstep = 1.0 * SIZE_IMG / data->line_h;
         // Starting texture coordinate
-        data->texpos = (data->draw_start - SCREEN_H / 2 + data->line_h / 2) * data->texstep;
+        data->texpos = (data->draw_start - SCREEN_H / 2.0 + data->line_h / 2.0) * data->texstep;
         data->y = data->draw_start - 1;
         while (++data->y < data->draw_end)
         {
