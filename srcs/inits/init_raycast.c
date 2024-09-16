@@ -68,6 +68,7 @@ void	get_pos(t_data *data)
 			{
 				set_dir(data, map[x][y]);
 				set_plane(data, map[x][y]);
+				
 			}
 			y++;
 		}

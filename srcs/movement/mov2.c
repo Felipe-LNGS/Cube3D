@@ -6,7 +6,7 @@
 /*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:58:15 by jfita             #+#    #+#             */
-/*   Updated: 2024/09/16 16:08:38 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:33:48 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	l_rotate(t_data *data)
 	old_planex = data->plane[X];
 	data->dir[X] = data->dir[X] * cos(-R_SPEED) - data->dir[Y] * sin(-R_SPEED);
 	data->dir[Y] = old_dirx * sin(-R_SPEED) + data->dir[Y] * cos(-R_SPEED);
-	data->plane[X] = data->plane[X] * cos(-R_SPEED) - data->plane[Y]
-		* sin(-R_SPEED);
+	data->plane[X] = data->plane[X] * cos(-R_SPEED) - data->plane[Y] * sin(-R_SPEED);
 	data->plane[Y] = old_planex * sin(-R_SPEED) + data->plane[Y] * cos(-R_SPEED);
 	return (1);
 }

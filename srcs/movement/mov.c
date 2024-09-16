@@ -6,7 +6,7 @@
 /*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:00:48 by lmerveil          #+#    #+#             */
-/*   Updated: 2024/09/16 16:07:21 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:27:35 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	can_move(t_data *data, double x, double y)
 		return (0);
 	if (y < 0.25 || y >= data->map->height - 0.25)
 		return (0);
-	if (data->map->tmp_grid[(int)(y)][(int)(x)] == '1')
+	if (data->map->tmp_grid[(int)(x)][(int)(y)] == '1')
 		return (0);
 	return (1);
 }

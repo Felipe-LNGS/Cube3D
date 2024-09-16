@@ -6,7 +6,7 @@
 /*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 16:23:01 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:28:28 by lmerveil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void    raycast(t_data *data)
             data->step[X] = -1;
             data->side_dist[X] = ((data->pos[X] - data->map_p[X]) * data->ddist[X]);
         }
-        else
+    	else if (data->ray_dir[X] > 0)
         {
             data->step[X] = 1;
             data->side_dist[X] = (data->map_p[X] + 1.0 - data->pos[X]) * data->ddist[X];
@@ -112,7 +112,8 @@ void    raycast(t_data *data)
             data->step[Y] = -1;
             data->side_dist[Y] = (data->pos[Y] - data->map_p[Y]) * data->ddist[Y];
         }
-        else
+        else if (data->ray_dir[Y] > 0)
+
         {
             data->step[Y] = 1;
             data->side_dist[Y] = (data->map_p[Y] + 1.0 - data->pos[Y]) * data->ddist[Y];
@@ -175,10 +176,8 @@ void    raycast(t_data *data)
             else
                 data->texnum = NO;
 		}
-
         //texturing calculations
         // data->texnum = ft_atoi(&data->map->tmp_grid[data->map_p[X]][data->map_p[Y]]);
-        
         //calculate value of wallX
         if (data->side == 0)
             data->wallx = data->pos[Y] + data->perpwalldist * data->ray_dir[Y];
@@ -192,12 +191,11 @@ void    raycast(t_data *data)
             data->tex[X] = SIZE_IMG - data->tex[X] - 1;
         if(data->side == 1 && data->ray_dir[Y] < 0)
             data->tex[X] = SIZE_IMG - data->tex[X] - 1;
-    
         // How much to increase the texture coordinate per screen pixel
         data->texstep = 1.0 * SIZE_IMG / data->line_h;
         // Starting texture coordinate
         data->texpos = (data->draw_start - SCREEN_H / 2.0 + data->line_h / 2.0) * data->texstep;
-        data->y = data->draw_start - 1;
+        data->y = data->draw_start - 1.0;
         while (++data->y < data->draw_end)
         {
             data->tex[Y] = (int)data->texpos & (SIZE_IMG - 1);
