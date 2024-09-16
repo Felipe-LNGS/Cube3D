@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 00:01:45 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:03:20 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	ft_img_addr(t_data *data, int **buffer)
 	img = ft_calloc(1, sizeof(t_imgs));
 	if(!img)
 		exit_free(data, MERROR);
-	img->mlx_ptr = mlx_new_image(data->mlx_ptr, SCREEN_W, SCREEN_H);
-	img->addr_ptr = (int *)mlx_get_data_addr(img->mlx_ptr, &img->pixel_bits, &img->line_len, &img->endian);
+	img->mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_W, SCREEN_H);
+	img->addr_ptr = (int *)mlx_get_data_addr(img->mlx_img, &img->pixel_bits, &img->line_len, &img->endian);
     i = 0;
     while (i < SCREEN_H)
 	{
@@ -51,8 +51,8 @@ static void	ft_img_addr(t_data *data, int **buffer)
 		}
         i++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->mlx_ptr, 0, 0);
-	mlx_destroy_image(data->mlx_ptr, img->mlx_ptr);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->mlx_img, 0, 0);
+	mlx_destroy_image(data->mlx_ptr, img->mlx_img);
 }
 
 
@@ -199,6 +199,7 @@ void    raycast(t_data *data)
         {
             data->tex[Y] = (int)data->texpos & (SIZE_IMG - 1);
             data->texpos += data->texstep;
+			printf("texture %d\n", data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]]);
             data->color = data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]];
             buffer[data->y][x] = data->color;
         }
