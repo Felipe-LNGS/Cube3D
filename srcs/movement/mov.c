@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mov.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:00:48 by lmerveil          #+#    #+#             */
-/*   Updated: 2024/09/16 16:27:35 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:02:39 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/cube.h"
-
-
 
 int	can_move(t_data *data, double x, double y)
 {
