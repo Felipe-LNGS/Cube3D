@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 16:50:15 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:44:55 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct s_data
 	int		move[2];
 	int 	moved;
 	int		rotate;
-	double	wallx;			//exact value where the wall was hit
-	int		tex[2];			//x-coordinate of the texture
+	double	wallx;			//exact x-value where the wall was hit
+	int		tex[2];			//coordinates of the texture
 	int		texstep;
 	int		texpos;
 	int 	texnum;			//value of the current map square minus 1
