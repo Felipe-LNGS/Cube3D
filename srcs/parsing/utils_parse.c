@@ -3,61 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 15:39:07 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:46:58 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-void	free_grid(t_data *data)
+int	open_file(t_data *data, char *filename)
 {
-	int	i;
+	int	fd;
 
-	i = 0;
-	while (i < data->map->nb_lines)
+	fd = open(filename, __O_DIRECTORY);
+	if (fd > 0)
 	{
-		free(data->map->grid[i]);
-		i++;
+		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
 	}
-	free(data->map->grid);
-}
-
-void	free_grid2(char **grid, int height)
-{
-	int	i;
-
-	i = 0;
-	while (i < height)
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
-}
-
-void	print_map(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < data->map->height)
-	{
-		j = 0;
-		while (j < data->map->width)
-		{
-			ft_printf("%c", data->map->tmp_grid[i][j]);
-			// printf(RED"OK"RESET);
-
-			j++;
-		}
-		i++;
-		ft_printf("\n");
-	}
-
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), exit_free(data, "Error\nFailed to open file."), 1);
+	return (fd);
 }
 
 char	*skip_space(char *line)
@@ -67,35 +34,47 @@ char	*skip_space(char *line)
 	return (line);
 }
 
-char	*ft_strducube( char *s, t_data *data)
+char	*ft_strducube(char *s, t_data *data)
 {
 	char	*dest;
-	int		i = 0, j;
+	int		i;
+	int		j;
 	int		len;
 
-	i = 0, j = 0;
+	i = 0;
+	j = 0;
 	len = 0;
 	while (s[len] != '\0')
 	{
-		if (s[len] != '\n') 
+		if (s[len] != '\n')
 			len++;
 		else
 			len++;
 	}
-	dest = malloc((len + 1) * sizeof(char)); 
+	dest = malloc((len + 1) * sizeof(char));
 	if (!dest)
 		return (exit_free(data, MERROR), NULL);
-	while (s[i] != '\0')
+	while (s[i] != '\0' && s[i] != '\n')
 	{
-		if (s[i] != '\n')
-		{
-			dest[j] = s[i];
-			j++;
-		}
+		dest[j] = s[i];
+		j++;
 		i++;
 	}
-	dest[j] = '\0';
-	return (dest);
+	return (dest[j] = '\0', dest);
+}
+
+// Verifie le format du fichier qui essaye d'etre ouvert
+int	check_format(char *map)
+{
+	int	len;
+
+	len = ft_strlen(map);
+	if (len > 4 && (!ft_strcmp(map + len - 4, ".cub")) == 0)
+	{
+		ft_printf(RED "Error\nThis is not the good format.\n" RESET);
+		exit(0);
+	}
+	return (1);
 }
 
 int	rgb_to_int(int *rgb)
@@ -107,3 +86,36 @@ int	rgb_to_int(int *rgb)
 }
 
 // verifier autour de chaque 0 si il y a autre chose que un 1 c'est carton rouge
+// void	print_map(t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (i < data->map->height)
+// 	{
+// 		j = 0;
+// 		while (j < data->map->width)
+// 		{
+// 			ft_printf("%c", data->map->tmp_grid[i][j]);
+// 			// printf(RED"OK"RESET);
+
+// 			j++;
+// 		}
+// 		i++;
+// 		ft_printf("\n");
+// 	}
+
+// }
+// void	free_grid(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < data->map->nb_lines)
+// 	{
+// 		free(data->map->grid[i]);
+// 		i++;
+// 	}
+// 	free(data->map->grid);
+// }
