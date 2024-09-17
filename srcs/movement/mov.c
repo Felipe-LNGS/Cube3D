@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:00:48 by lmerveil          #+#    #+#             */
-/*   Updated: 2024/09/17 11:54:14 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:06:05 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int	x_move(t_data *data, char leftorright)
 	y_tmp = 0;
 	if (leftorright == 'L')
 	{
-		x_tmp = data->pos[X] - data->dir[Y] * P_SPEED;
-		y_tmp = data->pos[Y] + data->dir[X] * P_SPEED;
+		x_tmp = data->pos[X] + data->dir[Y] * P_SPEED;
+		y_tmp = data->pos[Y] - data->dir[X] * P_SPEED;
 	}
 	else if (leftorright == 'R')
 	{
-		x_tmp = data->pos[X] + data->dir[Y] * P_SPEED;
-		y_tmp = data->pos[Y] - data->dir[X] * P_SPEED;
+		x_tmp = data->pos[X] - data->dir[Y] * P_SPEED;
+		y_tmp = data->pos[Y] + data->dir[X] * P_SPEED;
 	}
 	// printf("Position: x[%f] y[%f]\n\n", data->pos[X], data->pos[Y]);
 	// printf("Direction: dir[X]: %f, dir[Y]: %f\n\n", data->dir[X], data->dir[Y]);
@@ -90,14 +90,14 @@ int	moving(t_data *data)
 	int move;
 
 	move = 0;
-	printf("move [%d][%d]\n", data->move[X], data->move[Y]);
+	printf("move [%d][%d]\n", data->move[X],  data->move[Y]);
 	if (data->move[Y] == 1)
 		move += y_move(data, 'U');
 	if (data->move[Y] == -1)
 		move += y_move(data, 'D');
-	if (data->move[X] == 1)
-		move += x_move(data, 'L');
 	if (data->move[X] == -1)
+		move += x_move(data, 'L');
+	if (data->move[X] == 1)
 		move += x_move(data, 'R');
 	if (data->rotate > 0)
 		move += l_rotate(data);
