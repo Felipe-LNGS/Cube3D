@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mov2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:58:15 by jfita             #+#    #+#             */
-/*   Updated: 2024/09/16 16:33:48 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:59:58 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-int	r_rotate(t_data *data)
+int	l_rotate(t_data *data)
 {
 	double	old_dirx;
 	double	old_planex;
@@ -26,7 +26,7 @@ int	r_rotate(t_data *data)
 	return (1);
 }
 
-int	l_rotate(t_data *data)
+int	r_rotate(t_data *data)
 {
 	double	old_dirx;
 	double	old_planex;

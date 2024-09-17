@@ -6,23 +6,25 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:24:09 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:46:58 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-void	free_grid(t_data *data)
+int	open_file(t_data *data, char *filename)
 {
-	int	i;
+	int	fd;
 
-	i = 0;
-	while (i < data->map->nb_lines)
+	fd = open(filename, __O_DIRECTORY);
+	if (fd > 0)
 	{
-		free(data->map->grid[i]);
-		i++;
+		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
 	}
-	free(data->map->grid);
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), exit_free(data, "Error\nFailed to open file."), 1);
+	return (fd);
 }
 
 char	*skip_space(char *line)
@@ -58,7 +60,7 @@ char	*ft_strducube(char *s, t_data *data)
 		j++;
 		i++;
 	}
-	return (dest[j] = '\0',dest);
+	return (dest[j] = '\0', dest);
 }
 
 // Verifie le format du fichier qui essaye d'etre ouvert
@@ -104,4 +106,16 @@ int	rgb_to_int(int *rgb)
 // 		ft_printf("\n");
 // 	}
 
+// }
+// void	free_grid(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < data->map->nb_lines)
+// 	{
+// 		free(data->map->grid[i]);
+// 		i++;
+// 	}
+// 	free(data->map->grid);
 // }

@@ -3,9 +3,8 @@
 
 static void	set_plane(t_data *data, char who)
 {
-
-    // data->plane[X] = data->dir[Y] * (-1) * 0.66;
-    // data->plane[Y] = data->dir[X] * 0.66;
+	// data->plane[X] = data->dir[Y] * (-1) * 0.66;
+	// data->plane[Y] = data->dir[X] * 0.66;
 	if (who == 'N')
 	{
 		data->plane[X] = 0.66;
@@ -32,12 +31,12 @@ static void	set_dir(t_data *data, char who)
 	if (who == 'N')
 	{
 		data->dir[X] = 0;
-		data->dir[Y] = 1;
+		data->dir[Y] = -1;
 	}
 	if (who == 'S')
 	{
 		data->dir[X] = 0;
-		data->dir[Y] = -1;
+		data->dir[Y] = 1;
 	}
 	if (who == 'E')
 	{
@@ -68,7 +67,11 @@ void	get_pos(t_data *data)
 			{
 				set_dir(data, map[x][y]);
 				set_plane(data, map[x][y]);
-				
+				printf("Direction %c \n",map[x][y] );
+				printf("dir[X]: %f, dir[Y]: %f\n", data->dir[X], data->dir[Y]);
+				printf("plane[X]: %f, plane[Y]: %f\n", data->plane[X],
+					data->plane[Y]);
+				return ;
 			}
 			y++;
 		}

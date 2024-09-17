@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:02:20 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:47:12 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,20 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	double pos[2];       // xy-coordinate start position player on .cub grid
-	double dir[2];       // vecteur de direction initiale
-	double plane[2];     // la version 2d raycaster du plan de camera
-	int map_p[2];       
-		// xy-coordinate of current square of the map the ray is in
-	double camerax;      // xy-coordinate of point on camera plane
-	double ray_dir[2];   // exact poisition of ray in grid
-	double ddist[2];    
-		// distance the ray has to travel to go from 1 x-unit to the next x-unit
-	double side_dist[2];
-		// dist the ray has to travel from its start position to the first x-unit
-	int step[2];         // what direction to step in x or y-direction (either +1 or -1)
-	int hit;             // was there a wall hit?
-	int side;            // was a NS or a EW wall hit?
+	double pos[2];   // xy-coordinate start position player on .cub grid
+	double dir[2];   // vecteur de direction initiale
+	double plane[2]; // la version 2d raycaster du plan de camera
+	int					map_p[2];
+	// xy-coordinate of current square of the map the ray is in
+	double camerax;    // xy-coordinate of point on camera plane
+	double ray_dir[2]; // exact poisition of ray in grid
+	double				ddist[2];
+	// distance the ray has to travel to go from 1 x-unit to the next x-unit
+	double				side_dist[2];
+	// dist the ray has to travel from its start position to the first x-unit
+	int step[2]; // what direction to step in x or y-direction (either +1 or -1)
+	int hit;     // was there a wall hit?
+	int side;    // was a NS or a EW wall hit?
 	double				perpwalldist;
 	int					line_h;
 	int					line_w;
@@ -132,10 +132,12 @@ void					stock_info_bis(char *line, t_data *data);
 int						is_info(char *line);
 void					check_valid_char(t_data *data);
 void					check_is_close(t_data *data);
-void					split_rgb(t_data *data, char *rgb, char who, char **tab);
+void					split_rgb(t_data *data, char *rgb, char who,
+							char **tab);
 int						rgb_to_int(int *rgb);
 void					parse_map(t_data *data);
 void					get_pos(t_data *data);
+int						open_file(t_data *data, char *filename);
 /*-------------------UTILS-------------------*/
 char					*ft_strducube(char *s, t_data *data);
 /*--------------------FREE--------------------*/

@@ -6,26 +6,11 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:26:06 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:46:01 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
-
-static int	open_file(t_data *data, char *filename)
-{
-	int	fd;
-
-	fd = open(filename, __O_DIRECTORY);
-	if (fd > 0)
-	{
-		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
-	}
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (close(fd), exit_free(data, "Error\nFailed to open file."), 1);
-	return (fd);
-}
 
 // Calcul la longueur et largeur de la map
 int	get_height(char *filename, t_data *data)
@@ -102,12 +87,34 @@ int	read_map(char *filename, t_data *data)
 	return (free(line), close(fd), 0);
 }
 
+static char	*allocate_map_line(t_data *data, int start)
+{
+	char	*line;
+	int		y;
+
+	line = ft_calloc(sizeof(char), data->map->width);
+	if (!line)
+		exit_free(data, MERROR);
+	y = 0;
+	while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
+		&& y < data->map->width)
+	{
+		line[y] = data->map->grid[start][y];
+		y++;
+	}
+	while (y < data->map->width)
+	{
+		line[y] = ' ';
+		y++;
+	}
+	return (line);
+}
+
 void	rework_map(t_data *data)
 {
 	char	**map;
 	int		x;
 	int		start;
-	int		y;
 
 	x = 0;
 	start = data->map->start_line;
@@ -116,21 +123,7 @@ void	rework_map(t_data *data)
 		exit_free(data, MERROR);
 	while (start < data->map->nb_lines)
 	{
-		y = 0;
-		map[x] = ft_calloc(sizeof(char), data->map->width);
-		if (!map[x])
-			exit_free(data, MERROR);
-		while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
-			&& ++y < data->map->width)
-		{
-			map[x][y] = data->map->grid[start][y];
-			y++;
-		}
-		while (y < data->map->width)
-		{
-			map[x][y] = ' ';
-			y++;
-		}
+		map[x] = allocate_map_line(data, start);
 		x++;
 		start++;
 	}
