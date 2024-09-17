@@ -6,20 +6,20 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 16:48:02 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:06:06 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-static void reset_buffer(int **buffer)
+static  void reset_buffer(int **buffer)
 {
     int j;
 
     j = -1;
-    while (++j < SCREEN_H)  // Loop over the height
-        free(buffer[j]);    // Free each row
-    free(buffer);           // Free the array of pointers
+    while (++j < SCREEN_H)
+        free(buffer[j]);
+    free(buffer);
 }
 
 static void	ft_img_addr(t_data *data, int **buffer)
@@ -40,7 +40,7 @@ static void	ft_img_addr(t_data *data, int **buffer)
 		{
 			index = i * (img.line_len / 4) + j;
 			if (buffer[i][j] > 0)
-				img.addr_ptr[index] = buffer[i][j];
+                img.addr_ptr[index] = buffer[i][j];
 			else if (i < SCREEN_H / 2)
 				img.addr_ptr[index] = data->map->c_color;
 			else
@@ -83,27 +83,24 @@ int **init_buffer(t_data *data)
     return(buffer);
 }
 
+    //init ray_dir vector + camerax point
+    //init coordinates of box of the map we're in
+    //calculating ddist : length of ray from one x or y-side to next x or y-side
+
 void    init_raycast(t_data *data, int x)
 {
-    //init ray_dir vector + camerax point
     data->camerax = 2.0 * x / (double)SCREEN_W - 1;
     data->ray_dir[X] = data->dir[X] + data->plane[X] * data->camerax;
     data->ray_dir[Y] = data->dir[Y] + data->plane[Y] * data->camerax;         
-    
-    //init coordinates of box of the map we're in
     data->map_p[X] = (int)data->pos[X];
     data->map_p[Y] = (int)data->pos[Y];
-
-    //calculating ddist : length of ray from one x or y-side to next x or y-side
     data->ddist[X] = fabs(1 / data->ray_dir[X]);
     data->ddist[Y] = fabs(1 / data->ray_dir[Y]);
-    // printf("ddsitY: %f\n", data->ddist[Y]);
 }
 
 //calculate step and initial unitDist
 void    step_sidedist(t_data *data)
 {
-    //if raydir negative take step to left -> x = -1
     if (data->ray_dir[X] < 0)
     {
         data->step[X] = -1;
@@ -124,29 +121,28 @@ void    step_sidedist(t_data *data)
         data->step[Y] = 1;
         data->side_dist[Y] = (data->map_p[Y] + 1.0 - data->pos[Y]) * data->ddist[Y];
     }
-    // printf("sideditY: %f\n", data->side_dist[Y]);
 }
 
 //casts rays in raydir direction until it hits a '1' on the map
+        //jump to next map square, either in x-direction, or in y-direction
+        // Check if ray has hit a wall
 void    dda(t_data *data)
 {
     data->hit = 0;
     while (data->hit == 0)
     {
-        //jump to next map square, either in x-direction, or in y-direction
         if (data->side_dist[X] < data->side_dist[Y])
         {
             data->side_dist[X] += data->ddist[X];
             data->map_p[X] += data->step[X];
-            data->side = X;  //hit a x-side axis
+            data->side = X;
         }
         else
         {
             data->side_dist[Y] += data->ddist[Y];
             data->map_p[Y] += data->step[Y];
-            data->side = Y; //hit a y-side axis
+            data->side = Y;
         }
-        // Check if ray has hit a wall
         if (data->map_p[X] < 0 || data->map_p[Y] < 0 || data->map_p[X] >= data->map->width || data->map_p[Y] >= data->map->height)
             break;
         if (data->map->tmp_grid[data->map_p[X]][data->map_p[Y]] == '1')
@@ -171,7 +167,6 @@ void    raycast(t_data *data)
         else
             data->perpwalldist = (data->side_dist[Y] - data->ddist[Y]);
         data->line_h = (int)(SCREEN_H / data->perpwalldist);
-        printf("line h %d\n" , data->line_h);
         data->draw_start = SCREEN_H / 2 - (data->line_h) / 2;
         if (data->draw_start < 0)
             data->draw_start = 0;
@@ -216,4 +211,3 @@ void    raycast(t_data *data)
     ft_img_addr(data, buffer);
     reset_buffer(buffer);
 }
-

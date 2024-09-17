@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/16 15:38:42 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:03:35 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 {
 	int		x;
 	int		y;
-	t_imgs 	tmp; 	// struct for given image
-	int 	*tab;   // tab stock xpm
+	t_imgs 	tmp;
+	int 	*tab;
 	
 	load_xpm(data, &tmp, tex);
 	tab = ft_calloc(1, sizeof(int) * (SIZE_IMG * SIZE_IMG));
