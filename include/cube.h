@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/17 12:10:25 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:48:10 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ typedef struct s_map
 	int					f_tab[SIZE_TAB];
 	int					c_tab[SIZE_TAB];
 	int					nb_lines;
-	int width;  // map width
-	int height; // map height
+	int 				width;  // map width
+	int 				height; // map height
 }						t_map;
 
 typedef struct s_img
@@ -84,20 +84,20 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	double pos[2];   // xy-coordinate start position player on .cub grid
-	double dir[2];   // vecteur de direction initiale
-	double plane[2]; // la version 2d raycaster du plan de camera
+	double 				pos[2];   // xy-coordinate start position player on .cub grid
+	double 				dir[2];   // vecteur de direction initiale
+	double 				plane[2]; // la version 2d raycaster du plan de camera
 	int					map_p[2];
 	// xy-coordinate of current square of the map the ray is in
-	double camerax;    // xy-coordinate of point on camera plane
-	double ray_dir[2]; // exact poisition of ray in grid
+	double 				camerax;    // xy-coordinate of point on camera plane
+	double 				ray_dir[2]; // exact poisition of ray in grid
 	double				ddist[2];
 	// distance the ray has to travel to go from 1 x-unit to the next x-unit
 	double				side_dist[2];
 	// dist the ray has to travel from its start position to the first x-unit
-	int step[2]; // what direction to step in x or y-direction (either +1 or -1)
-	int hit;     // was there a wall hit?
-	int side;    // was a NS or a EW wall hit?
+	int 				step[2]; // what direction to step in x or y-direction (either +1 or -1)
+	int 				hit;     // was there a wall hit?
+	int 				side;    // was a NS or a EW wall hit?
 	double				perpwalldist;
 	int					line_h;
 	int					line_w;
@@ -108,11 +108,11 @@ typedef struct s_data
 	int					move[2];
 	int					moved;
 	int					rotate;
-	double wallx; // exact value where the wall was hit
-	int tex[2];   // x-coordinate of the texture
-	int					texstep;
-	int					texpos;
-	int texnum; // value of the current map square minus 1
+	double 				wallx; // exact value where the wall was hit
+	int 				tex[2];   // x-coordinate of the texture
+	double				texstep;
+	double				texpos;
+	int 				texnum; // value of the current map square minus 1
 	void				*mlx_ptr;
 	void				*win_ptr;
 	t_imgs				*img;
@@ -133,8 +133,7 @@ void					stock_info_bis(char *line, t_data *data);
 int						is_info(char *line);
 void					check_valid_char(t_data *data);
 void					check_is_close(t_data *data);
-void					split_rgb(t_data *data, char *rgb, char who,
-							char **tab);
+void					split_rgb(t_data *data, char *rgb, char who, char **tab);
 int						rgb_to_int(int *rgb);
 void					parse_map(t_data *data);
 void					get_pos(t_data *data);

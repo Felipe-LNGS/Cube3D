@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/17 12:10:40 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:51:06 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	moving(t_data *data)
 	int move;
 
 	move = 0;
-	printf("move [%d][%d]\n", data->move[X],  data->move[Y]);
+	// printf("move [%d][%d]\n", data->move[X],  data->move[Y]);
 	if (data->move[Y] == 1)
 		move += y_move(data, 'U');
 	if (data->move[Y] == -1)
