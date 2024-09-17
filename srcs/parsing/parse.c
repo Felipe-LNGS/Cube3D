@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 17:18:48 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:26:58 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,21 +92,27 @@ void	find_start_line(t_data *data)
 
 void	parse_map(t_data *data)
 {
+	char	**tab;
+
+	tab = NULL;
 	find_start_line(data);
 	get_width(data);
 	rework_map(data);
-	// print_map(data);
-	// printf("north[%s]\n", data->map->north_path);
-	// printf("s [%s]\n", data->map->south_path);
-	// printf("e [%s]\n", data->map->east_path);
-	// printf("w [%s]\n", data->map->west_path);
-	// printf("f [%s]\n", data->map->f);
-	// printf("c [%s]\n", data->map->c);
-	// printf("f path[%s]\n", data->map->f);
-	// printf("c path[%s]\n", data->map->c);
 	check_valid_char(data);
 	check_is_close(data);
 	get_pos(data);
-	split_rgb(data, data->map->f, 'F');
-	split_rgb(data, data->map->c, 'C');
+	split_rgb(data, data->map->f, 'F', tab);
+	split_rgb(data, data->map->c, 'C', tab);
 }
+
+// printf("f path[%d]\n", data->map->f_color);
+// printf("c path[%d]\n", data->map->c_color);
+// print_map(data);
+// printf("north[%s]\n", data->map->north_path);
+// printf("s [%s]\n", data->map->south_path);
+// printf("e [%s]\n", data->map->east_path);
+// printf("w [%s]\n", data->map->west_path);
+// printf("f [%s]\n", data->map->f);
+// printf("c [%s]\n", data->map->c);
+// printf("f path[%s]\n", data->map->f);
+// printf("c path[%s]\n", data->map->c);

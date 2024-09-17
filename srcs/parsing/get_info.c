@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 14:32:05 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:23:26 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ static int	check_value(char *str)
 	digit_count = 0;
 	while (str[i])
 	{
-		if (str[i] == '\n')
-		{
-			i++;
-			continue ; // Passer à l'itération suivante
-		}
 		if (ft_isdigit(str[i]))
 			digit_count++;
+		else if (str[i] == '\n')
+		{
+			i++;
+			continue ;
+		}
 		else
 			return (1);
 		i++;
@@ -113,36 +113,34 @@ static int	check_value(char *str)
 		return (1);
 	if (digit_count == 0)
 		return (1);
-	return (0); // Tout est valide
+	return (0);
 }
 
-void	split_rgb(t_data *data, char *rgb, char who)
+void	split_rgb(t_data *data, char *rgb, char who, char **tab)
 {
-	char	**splited;
-	int		i;
+	int	i;
 
 	if (!rgb)
 		exit_free(data, "Missing rgb code");
-	splited = ft_split(rgb, ',');
-	if(!splited)
+	tab = ft_split(rgb, ',');
+	if (!tab)
 		exit_free(data, MERROR);
-	i = 0;
-	while (i < 3)
+	i = -1;
+	while (++i < 3)
 	{
-		if (splited[i] && check_value(splited[i]) == 0)
+		if (tab[i] && check_value(tab[i]) == 0)
 		{
 			if (who == 'F' && data->map->f)
-				data->map->f_tab[i] = ft_atoi(splited[i]);
+				data->map->f_tab[i] = ft_atoi(tab[i]);
 			if (who == 'F')
 				data->map->f_color = rgb_to_int(data->map->f_tab);
 			if (who == 'C' && data->map->c)
-				data->map->c_tab[i] = ft_atoi(splited[i]);
+				data->map->c_tab[i] = ft_atoi(tab[i]);
 			if (who == 'C')
 				data->map->c_color = rgb_to_int(data->map->c_tab);
 		}
 		else
-			(free_split(splited), exit_free(data, "Invalid rgb code"));
-		i++;
+			(free_split(tab), exit_free(data, "Invalid rgb code"));
 	}
-	free_split(splited);
+	free_split(tab);
 }

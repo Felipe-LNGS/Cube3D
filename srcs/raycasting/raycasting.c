@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 17:28:28 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 09:46:03 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,9 @@ void    raycast(t_data *data)
         //texturing calculations
         // data->texnum = ft_atoi(&data->map->tmp_grid[data->map_p[X]][data->map_p[Y]]);
         //calculate value of wallX
-        if (data->side == 0)
+        if (data->perpwalldist < 0.01)
+   			 data->perpwalldist = 0.01;
+		if (data->side == 0)
             data->wallx = data->pos[Y] + data->perpwalldist * data->ray_dir[Y];
         else
             data->wallx = data->pos[X] + data->perpwalldist * data->ray_dir[X];
@@ -206,6 +208,8 @@ void    raycast(t_data *data)
             if (data->y >= 0 && data->y < SCREEN_H)
     			buffer[data->y][x] = data->color;
         }
+		
+
     x++;
     }
     ft_img_addr(data, buffer);

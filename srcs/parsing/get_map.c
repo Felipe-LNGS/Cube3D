@@ -3,34 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/16 15:39:09 by lmerveil         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:26:06 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-// Verifie le format du fichier qui essaye d'etre ouvert
-int	check_format(char *map)
-{
-	int	len;
-
-	len = ft_strlen(map);
-	if (len > 4 && (!ft_strcmp(map + len - 4, ".cub")) == 0)
-	{
-		ft_printf(RED "Error\nThis is not the good format.\n" RESET);
-		exit(0);
-	}
-	return (1);
-}
-
 static int	open_file(t_data *data, char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_DIRECTORY);
+	fd = open(filename, __O_DIRECTORY);
 	if (fd > 0)
 	{
 		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
@@ -115,29 +101,6 @@ int	read_map(char *filename, t_data *data)
 	}
 	return (free(line), close(fd), 0);
 }
-void	print_tmp_grid(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data == NULL || data->map == NULL || data->map->tmp_grid == NULL)
-	{
-		printf("Error: No data to print.\n");
-		return ;
-	}
-	while (i < data->map->height)
-	{
-		if (data->map->tmp_grid[i] != NULL)
-		{
-			printf("[%d][%s] \n", i, data->map->tmp_grid[i]);
-		}
-		else
-		{
-			printf("Line %d is NULL\n", i);
-		}
-		i++;
-	}
-}
 
 void	rework_map(t_data *data)
 {
@@ -158,7 +121,7 @@ void	rework_map(t_data *data)
 		if (!map[x])
 			exit_free(data, MERROR);
 		while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
-			&& y < data->map->width)
+			&& ++y < data->map->width)
 		{
 			map[x][y] = data->map->grid[start][y];
 			y++;
@@ -172,5 +135,28 @@ void	rework_map(t_data *data)
 		start++;
 	}
 	data->map->tmp_grid = map;
-	// print_tmp_grid(data);
 }
+
+// void	print_tmp_grid(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (data == NULL || data->map == NULL || data->map->tmp_grid == NULL)
+// 	{
+// 		printf("Error: No data to print.\n");
+// 		return ;
+// 	}
+// 	while (i < data->map->height)
+// 	{
+// 		if (data->map->tmp_grid[i] != NULL)
+// 		{
+// 			printf("[%d][%s] \n", i, data->map->tmp_grid[i]);
+// 		}
+// 		else
+// 		{
+// 			printf("Line %d is NULL\n", i);
+// 		}
+// 		i++;
+// 	}
+// }
