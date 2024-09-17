@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 17:06:06 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:19:07 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static void	ft_img_addr(t_data *data, int **buffer)
 	ft_bzero(&img, sizeof(t_imgs));
 	img.mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_W, SCREEN_H);
 	img.addr_ptr = (int *)mlx_get_data_addr(img.mlx_img, &img.pixel_bits, &img.line_len, &img.endian);
-    i = 0;
-    while (i < SCREEN_H)
+    i = -1;
+    while (++i < SCREEN_H)
 	{
-		j = 0;
-		while (j < SCREEN_W)
+		j = -1;
+		while (++j < SCREEN_W)
 		{
 			index = i * (img.line_len / 4) + j;
 			if (buffer[i][j] > 0)
@@ -45,9 +45,7 @@ static void	ft_img_addr(t_data *data, int **buffer)
 				img.addr_ptr[index] = data->map->c_color;
 			else
 				img.addr_ptr[index] = data->map->f_color;
-            j++;
 		}
-        i++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.mlx_img, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, img.mlx_img);
@@ -83,9 +81,9 @@ int **init_buffer(t_data *data)
     return(buffer);
 }
 
-    //init ray_dir vector + camerax point
-    //init coordinates of box of the map we're in
-    //calculating ddist : length of ray from one x or y-side to next x or y-side
+//init ray_dir vector + camerax point
+//init coordinates of box of the map we're in
+//calculating ddist : length of ray from one x or y-side to next x or y-side
 
 void    init_raycast(t_data *data, int x)
 {
@@ -98,7 +96,7 @@ void    init_raycast(t_data *data, int x)
     data->ddist[Y] = fabs(1 / data->ray_dir[Y]);
 }
 
-//calculate step and initial unitDist
+//calculate step and initial sideDist
 void    step_sidedist(t_data *data)
 {
     if (data->ray_dir[X] < 0)
@@ -150,6 +148,58 @@ void    dda(t_data *data)
     }
 }
 
+void    projection_prep(t_data *data)
+{
+    if (data->side == X)
+        data->perpwalldist = (data->side_dist[X] - data->ddist[X]);
+    else
+        data->perpwalldist = (data->side_dist[Y] - data->ddist[Y]);
+    data->line_h = (int)(SCREEN_H / data->perpwalldist);
+    data->draw_start = SCREEN_H / 2 - (data->line_h / 2);
+    if (data->draw_start < 0)
+        data->draw_start = 0;
+    data->draw_end = data->line_h / 2 + SCREEN_H / 2;
+    if (data->draw_end >= SCREEN_H)
+        data->draw_end = SCREEN_H - 1;
+    if (data->side == X)
+    {
+        if (data->ray_dir[X] < 0)
+            data->texnum = WE;
+        else
+            data->texnum = EA;
+    }
+    else
+    {
+        if (data->ray_dir[Y] > 0)
+            data->texnum = SO;
+        else
+            data->texnum = NO;
+    }
+}
+
+void    fill_buffer(t_data *data, int **buffer, int x)
+{
+    if (data->side == X)
+        data->wallx = data->pos[Y] + data->perpwalldist * data->ray_dir[Y];
+    else
+        data->wallx = data->pos[X] + data->perpwalldist * data->ray_dir[X];
+    data->wallx -= floor((data->wallx));
+    data->tex[X] = (int)(data->wallx * (double)SIZE_IMG);
+    if((data->side == X && data->ray_dir[X] > 0) || (data->side == Y && data->ray_dir[Y] < 0))
+        data->tex[X] = SIZE_IMG - data->tex[X] - 1;
+    data->texstep = 1.0 * SIZE_IMG / data->line_h;
+    data->texpos = (data->draw_start - SCREEN_H / 2.0 + data->line_h / 2.0) * data->texstep;
+    data->y = data->draw_start;
+    while (data->y < data->draw_end)
+    {
+        data->tex[Y] = (int)data->texpos & (SIZE_IMG - 1);
+        data->texpos += data->texstep;
+        data->color = data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]];
+        buffer[data->y][x] = data->color;
+        data->y++;
+    }
+}
+
 void    raycast(t_data *data)
 {
     int     x;
@@ -162,50 +212,8 @@ void    raycast(t_data *data)
         init_raycast(data, x);
         step_sidedist(data);
         dda(data);
-        if (data->side == X)
-            data->perpwalldist = (data->side_dist[X] - data->ddist[X]);
-        else
-            data->perpwalldist = (data->side_dist[Y] - data->ddist[Y]);
-        data->line_h = (int)(SCREEN_H / data->perpwalldist);
-        data->draw_start = SCREEN_H / 2 - (data->line_h) / 2;
-        if (data->draw_start < 0)
-            data->draw_start = 0;
-        data->draw_end = data->line_h / 2 + SCREEN_H / 2;
-		if (data->draw_end >= SCREEN_H)
-            data->draw_end = SCREEN_H - 1;
-        if (data->side == X)
-        {
-            if (data->ray_dir[X] < 0)
-                data->texnum = WE;
-            else
-                data->texnum = EA;
-        }
-        else
-        {
-            if (data->ray_dir[Y] > 0)
-                data->texnum = SO;
-            else
-                data->texnum = NO;
-		}
-		if (data->side == 0)
-            data->wallx = data->pos[Y] + data->perpwalldist * data->ray_dir[Y];
-        else
-            data->wallx = data->pos[X] + data->perpwalldist * data->ray_dir[X];
-        data->wallx -= floor((data->wallx));
-        data->tex[X] = (int)(data->wallx * (double)SIZE_IMG);
-        if((data->side == X && data->ray_dir[X] > 0) || (data->side == Y && data->ray_dir[Y] < 0))
-            data->tex[X] = SIZE_IMG - data->tex[X] - 1;
-        data->texstep = 1.0 * SIZE_IMG / data->line_h;
-        data->texpos = (data->draw_start - SCREEN_H / 2.0 + data->line_h / 2.0) * data->texstep;
-        data->y = data->draw_start;
-        while (data->y < data->draw_end)
-        {
-            data->tex[Y] = (int)data->texpos & (SIZE_IMG - 1);
-            data->texpos += data->texstep;
-            data->color = data->img->texture[data->texnum][SIZE_IMG * data->tex[Y] + data->tex[X]];
-            buffer[data->y][x] = data->color;
-            data->y++;
-        }
+        projection_prep(data);
+        fill_buffer(data, buffer, x);
         x++;
     }
     ft_img_addr(data, buffer);
