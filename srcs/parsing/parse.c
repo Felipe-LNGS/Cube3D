@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 13:53:15 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:03:00 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	check_valid_char(t_data *data)
 				nb_start++;
 			}
 			y++;
-			if (nb_start > 1)
-				exit_free(data, "Error: more than one start position found.");
 		}
 		x++;
 	}
+	if (nb_start > 1 || nb_start == 0)
+		exit_free(data, "Error: more than one or no start position found.");
 }
 
 void	check_is_close(t_data *data)

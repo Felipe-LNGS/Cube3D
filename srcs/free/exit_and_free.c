@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:01:46 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:26:44 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,7 @@ void	free_all(t_data *data, t_imgs *img)
 		free(data->mlx_ptr);
 	}
 	if (data->img->texture)
-	{
-		if (data->img->texture[NO])
-			free(data->img->texture[NO]);
-		if (data->img->texture[SO])
-			free(data->img->texture[SO]);
-		if (data->img->texture[WE])
-			free(data->img->texture[WE]);
-		if (data->img->texture[EA])
-			free(data->img->texture[EA]);
-	}
+		free_split((char **)data->img->texture);
 	free(data->img);
 }
 

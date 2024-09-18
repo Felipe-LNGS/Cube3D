@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:46:01 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:56:11 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	get_height(char *filename, t_data *data)
 	int		fd;
 	char	*line;
 
+	if (check_format(filename) == 1)
+		exit_free(data, "Error\nNot the good format. Need .cub files ");
 	fd = open_file(data, filename);
 	line = get_next_line(fd);
 	if (line == NULL)
@@ -126,6 +128,16 @@ void	rework_map(t_data *data)
 		map[x] = allocate_map_line(data, start);
 		x++;
 		start++;
+	}
+	if (x < 1)
+	{
+		free(map);
+		exit_free(data, "Error\nmissing map");
+	}
+	if (x < 3)
+	{
+		free_split(map);
+		exit_free(data, "Error\nmap too small");
 	}
 	data->map->tmp_grid = map;
 }
