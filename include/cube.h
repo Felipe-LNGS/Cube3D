@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/18 11:25:02 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:34:59 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define SCREEN_H 720
 # define SIZE_IMG 64
 # define MERROR "Error : malloc"
-# define P_SPEED 0.05
-# define R_SPEED 0.06
+# define P_SPEED 0.035
+# define R_SPEED 0.04
 
 typedef struct
 {

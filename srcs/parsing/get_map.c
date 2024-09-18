@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:56:11 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:11:30 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ int	get_height(char *filename, t_data *data)
 
 void	get_width(t_data *data)
 {
-	int	x;
+	int	y;
 	int	line_length;
 
 	data->map->height = data->map->nb_lines - data->map->start_line;
-	x = data->map->start_line;
-	while (x < data->map->nb_lines)
+	y = data->map->start_line;
+	while (y < data->map->nb_lines)
 	{
 		line_length = 0;
-		while (data->map->grid[x][line_length] != '\0'
-			&& data->map->grid[x][line_length] != '\n')
+		while (data->map->grid[y][line_length] != '\0'
+			&& data->map->grid[y][line_length] != '\n')
 		{
 			line_length++;
 		}
@@ -57,7 +57,7 @@ void	get_width(t_data *data)
 		{
 			data->map->width = line_length;
 		}
-		x++;
+		y++;
 	}
 }
 
@@ -92,22 +92,22 @@ int	read_map(char *filename, t_data *data)
 static char	*allocate_map_line(t_data *data, int start)
 {
 	char	*line;
-	int		y;
+	int		x;
 
 	line = ft_calloc(sizeof(char), data->map->width);
 	if (!line)
 		exit_free(data, MERROR);
-	y = 0;
-	while (data->map->grid[start][y] && data->map->grid[start][y] != '\n'
-		&& y < data->map->width)
+	x = 0;
+	while (data->map->grid[start][x] && data->map->grid[start][x] != '\n'
+		&& x < data->map->width)
 	{
-		line[y] = data->map->grid[start][y];
-		y++;
+		line[x] = data->map->grid[start][x];
+		x++;
 	}
-	while (y < data->map->width)
+	while (x < data->map->width)
 	{
-		line[y] = ' ';
-		y++;
+		line[x] = ' ';
+		x++;
 	}
 	return (line);
 }
@@ -115,26 +115,26 @@ static char	*allocate_map_line(t_data *data, int start)
 void	rework_map(t_data *data)
 {
 	char	**map;
-	int		x;
+	int		y;
 	int		start;
 
-	x = 0;
+	y = 0;
 	start = data->map->start_line;
 	map = ft_calloc(sizeof(char *), data->map->height + 1);
 	if (!map)
 		exit_free(data, MERROR);
 	while (start < data->map->nb_lines)
 	{
-		map[x] = allocate_map_line(data, start);
-		x++;
+		map[y] = allocate_map_line(data, start);
+		y++;
 		start++;
 	}
-	if (x < 1)
+	if (y < 1)
 	{
 		free(map);
 		exit_free(data, "Error\nmissing map");
 	}
-	if (x < 3)
+	if (y < 3)
 	{
 		free_split(map);
 		exit_free(data, "Error\nmap too small");

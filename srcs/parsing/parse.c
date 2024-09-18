@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 11:24:49 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:21:37 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ void	check_valid_char(t_data *data)
 	int	nb_start;
 
 	nb_start = 0;
-	x = 0;
-	while (x < data->map->height)
+	y = 0;
+	while (y < data->map->height)
 	{
-		y = 0;
-		while (y < data->map->width)
+		x = 0;
+		while (x < data->map->width)
 		{
-			if ((ft_strchr(" 01NSEW\n", data->map->tmp_grid[x][y]) == NULL))
+			if ((ft_strchr(" 01NSEW\n", data->map->tmp_grid[y][x]) == NULL))
 				exit_free(data, "Invalid character need to put only 01NSEW");
-			if ((ft_strchr("NSEW", data->map->tmp_grid[x][y]) != NULL))
+			if ((ft_strchr("NSEW", data->map->tmp_grid[y][x]) != NULL))
 			{
-				data->pos[X] = (double)x + 0.5;
-				data->pos[Y] = (double)y + 0.5;
+				data->pos[X] = (double)y + 0.5;
+				data->pos[Y] = (double)x + 0.5;
 				nb_start++;
 			}
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	if (nb_start > 1 || nb_start == 0)
 		exit_free(data, "Error: more than one or no start position found.");
@@ -48,24 +48,24 @@ void	check_is_close(t_data *data)
 	char	**map;
 
 	map = data->map->tmp_grid;
-	x = -1;
-	while (++x < data->map->height)
+	y = -1;
+	while (++y < data->map->height)
 	{
-		y = 0;
-		while (y < data->map->width)
+		x = 0;
+		while (x < data->map->width)
 		{
-			if (ft_strchr("0NSEW", map[x][y]))
+			if (ft_strchr("0NSEW", map[y][x]))
 			{
-				if (x == 0 || x == data->map->height - 1 || y == 0
-					|| y == data->map->width - 1)
+				if (y == 0 || y == data->map->height - 1 || x == 0
+					|| x == data->map->width - 1)
 					exit_free(data, "Map not closed: character on the edge.");
-				if ((x + 1 < data->map->nb_lines && map[x + 1][y] == ' ') || (x
-						- 1 >= 0 && map[x - 1][y] == ' ') || (y
-						+ 1 < data->map->width && map[x][y + 1] == ' ') || (y
-						- 1 >= 0 && map[x][y - 1] == ' '))
+				if ((y + 1 < data->map->nb_lines && map[y + 1][x] == ' ') || (y
+						- 1 >= 0 && map[y - 1][X] == ' ') || (x
+						+ 1 < data->map->width && map[y][x + 1] == ' ') || (x
+						- 1 >= 0 && map[y][x - 1] == ' '))
 					exit_free(data, "Map not closed: adjacent to empty space");
 			}
-			y++;
+			x++;
 		}
 	}
 }
