@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:48:14 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 09:48:18 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:28:24 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	can_move(t_data *data, double x, double y)
 		return (0);
 	if (y < 0.25 || y >= data->map->height - 0.25)
 		return (0);
-	if (data->map->tmp_grid[(int)(x)][(int)(y)] == '1')
+	if (data->map->tmp_grid[(int)(y)][(int)(x)] == '1')
 		return (0);
 	return (1);
 }
