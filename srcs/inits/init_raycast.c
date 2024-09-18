@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:47:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:20:03 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:26:56 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ static void	set_dirplane(t_data *data, char who)
 	if (who == 'N')
 	{
 		data->dir[X] = 0;
-		data->dir[Y] = 1;
+		data->dir[Y] = -1;
 	}
 	if (who == 'S')
 	{
 		data->dir[X] = 0;
-		data->dir[Y] = -1;
+		data->dir[Y] = 1;
 	}
 	if (who == 'E')
 	{
-		data->dir[X] = -1;
+		data->dir[X] = 1;
 		data->dir[Y] = 0;
 	}
 	if (who == 'W')
 	{
-		data->dir[X] = 1;
+		data->dir[X] = -1;
 		data->dir[Y] = 0;
 	}
 	data->plane[X] = data->dir[Y] * (-1) * 0.66;

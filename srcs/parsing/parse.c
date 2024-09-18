@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:27:06 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:32:07 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	check_valid_char(t_data *data)
 				exit_free(data, "Invalid character need to put only 01NSEW");
 			if ((ft_strchr("NSEW", data->map->tmp_grid[y][x]) != NULL))
 			{
-				data->pos[X] = (double)y + 0.5;
-				data->pos[Y] = (double)x + 0.5;
+				data->pos[X] = (double)x + 0.5;
+				data->pos[Y] = (double)y + 0.5;
 				nb_start++;
 			}
 			x++;
@@ -59,10 +59,8 @@ void	check_is_close(t_data *data)
 				if (y == 0 || y == data->map->height - 1 || x == 0
 					|| x == data->map->width - 1)
 					exit_free(data, "Map not closed: character on the edge.");
-				if ((y + 1 < data->map->nb_lines && map[y + 1][x] == ' ') || (y
-						- 1 >= 0 && map[y - 1][X] == ' ') || (x
-						+ 1 < data->map->width && map[y][x + 1] == ' ') || (x
-						- 1 >= 0 && map[y][x - 1] == ' '))
+				else if ((data->map->tmp_grid[y + 1][x] == ' ') || (data->map->tmp_grid[y - 1][x] == ' ')
+					|| (data->map->tmp_grid[y][x + 1] == ' ') || (data->map->tmp_grid[y][x - 1] == ' '))
 					exit_free(data, "Map not closed: adjacent to empty space");
 			}
 			x++;
@@ -105,6 +103,9 @@ void	parse_map(t_data *data, char *filename)
 	get_pos(data);
 	split_rgb(data, data->map->f, 'F', tab);
 	split_rgb(data, data->map->c, 'C', tab);
+	printf("height %d\n",data->map->height);
+	printf("width %d\n",data->map->width);
+
 }
 
 // printf("f path[%d]\n", data->map->f_color);

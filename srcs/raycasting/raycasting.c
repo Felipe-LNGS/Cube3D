@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:36:19 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:39:53 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	ft_img_addr(t_data *data, int **buffer)
 	int		j;
 	int		index;
 	t_imgs	img;
+
 	ft_bzero(&img, sizeof(t_imgs));
 	img.mlx_img = mlx_new_image(data->mlx_ptr, SCREEN_W, SCREEN_H);
 	img.addr_ptr = (int *)mlx_get_data_addr(img.mlx_img, &img.pixel_bits,
@@ -145,10 +146,9 @@ void	dda(t_data *data)
 		}
 		// printf("data->map->width %d\n", data->map->width);
 		// printf("data->map->height %d\n", data->map->height);
-		
 		if (data->map_p[X] < 0.25 || data->map_p[Y] < 0.25
-			|| data->map_p[X] >= data->map->width -1.25
-			|| data->map_p[Y] >= data->map->height -0.25 )
+			|| data->map_p[X] > data->map->width - 1.25
+			|| data->map_p[Y] > data->map->height - 0.25)
 			break ;
 		if (data->map->tmp_grid[data->map_p[Y]][data->map_p[X]] == '1')
 			data->hit = 1;

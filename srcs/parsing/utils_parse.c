@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 11:11:27 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:31:27 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	open_file(t_data *data, char *filename)
 	fd = open(filename, __O_DIRECTORY);
 	if (fd > 0)
 	{
-		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
+		return (exit_free(data, "Error\nTry to read empty map."), 1);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (close(fd), exit_free(data, "Error\nFailed to open file."), 1);
+		return (exit_free(data, "Error\nFailed to open file."), 1);
 	return (fd);
 }
 
