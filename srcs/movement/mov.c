@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   mov.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/17 17:03:18 by louismdv         ###   ########.fr       */
+/*   Created: 2024/09/18 09:48:14 by plangloi          #+#    #+#             */
+/*   Updated: 2024/09/18 09:48:18 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/cube.h"
 
@@ -84,7 +83,7 @@ int	x_move(t_data *data, char leftorright)
 
 int	moving(t_data *data)
 {
-	int move;
+	int	move;
 
 	move = 0;
 	if (data->move[Y] == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmerveil <lmerveil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/16 11:10:39 by lmerveil         ###   ########.fr       */
+/*   Created: 2024/09/18 09:47:16 by plangloi          #+#    #+#             */
+/*   Updated: 2024/09/18 10:15:12 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

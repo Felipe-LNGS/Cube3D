@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/17 18:39:55 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:27:38 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define SCREEN_H 720
 # define SIZE_IMG 64
 # define MERROR "Error : malloc"
-# define P_SPEED 0.03
-# define R_SPEED 0.04
+# define P_SPEED 0.05
+# define R_SPEED 0.06
 
 typedef struct
 {
@@ -141,7 +141,7 @@ int						open_file(t_data *data, char *filename);
 /*-------------------UTILS-------------------*/
 char					*ft_strducube(char *s, t_data *data);
 /*--------------------FREE--------------------*/
-void					free_all(t_data *data);
+void					free_all(t_data *data, t_imgs *img);
 void					exit_free(t_data *data, char *str);
 /*--------------------MLX--------------------*/
 void					initiate_mlx(t_data *data);
