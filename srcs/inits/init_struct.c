@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:47:16 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:15:12 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:42:38 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
+// creation: mlx_ptr + window
 void	initiate_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init();

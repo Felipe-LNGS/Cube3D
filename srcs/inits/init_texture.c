@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:47:58 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:16:15 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:42:46 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	load_xpm(t_data *data, t_imgs *tmp, char *tex)
 	tmp->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, tex, &tmp->width,
 			&tmp->height);
 	if (!tmp->mlx_img)
-		exit_free(data, "test");
+		exit_free(data, "Error\nXpm doesn't exist!");
 	tmp->addr_ptr = (int *)mlx_get_data_addr(tmp->mlx_img, &tmp->pixel_bits,
 			&tmp->line_len, &tmp->endian);
 }
@@ -43,7 +43,6 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 	t_imgs	tmp;
 	int		*tab;
 
-	tmp = ft_calloc()
 	load_xpm(data, &tmp, tex);
 	tab = ft_calloc(1, sizeof(int) * (SIZE_IMG * SIZE_IMG));
 	if (!tab)
@@ -63,6 +62,7 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 	return (tab);
 }
 
+// init xpm textures
 void	init_texture(t_data *data, t_imgs *img)
 {
 	img->texture = ft_calloc(5, sizeof(int *));
