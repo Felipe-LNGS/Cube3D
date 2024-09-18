@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 13:58:00 by plangloi         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/09/18 09:27:38 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUBE_H
 # define CUBE_H
@@ -31,8 +32,8 @@
 # define SCREEN_H 720
 # define SIZE_IMG 64
 # define MERROR "Error : malloc"
-# define P_SPEED 0.03
-# define R_SPEED 0.04
+# define P_SPEED 0.05
+# define R_SPEED 0.06
 
 typedef struct
 {
@@ -65,8 +66,8 @@ typedef struct s_map
 	int					f_tab[SIZE_TAB];
 	int					c_tab[SIZE_TAB];
 	int					nb_lines;
-	int width;  // map width
-	int height; // map height
+	int 				width;  // map width
+	int 				height; // map height
 }						t_map;
 
 typedef struct s_img
@@ -83,35 +84,35 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	double pos[2];   // xy-coordinate start position player on .cub grid
-	double dir[2];   // vecteur de direction initiale
-	double plane[2]; // la version 2d raycaster du plan de camera
-	int					map_p[2];
-	// xy-coordinate of current square of the map the ray is in
-	double camerax;    // xy-coordinate of point on camera plane
-	double ray_dir[2]; // exact poisition of ray in grid
-	double				ddist[2];
-	// distance the ray has to travel to go from 1 x-unit to the next x-unit
-	double				side_dist[2];
-	// dist the ray has to travel from its start position to the first x-unit
-	int step[2]; // what direction to step in x or y-direction (either +1 or -1)
-	int hit;     // was there a wall hit?
-	int side;    // was a NS or a EW wall hit?
-	double				perpwalldist;
-	int					line_h;
-	int					line_w;
-	int					draw_start;
+/*-------------------GESTION MAP-------------------*/
+	double 				pos[2];   		// xy-coordinate start position player on .cub grid
+	double 				dir[2];   		// vecteur de direction initiale
+	double 				plane[2]; 		// la version 2d raycaster du plan de camera
+	int					map_p[2];		// xy-coordinate of current square of the map the ray is in
+	double 				camerax;    	// xy-coordinate of point on camera plane
+/*--------------------RAYCASTING-------------------*/
+	double 				ray_dir[2]; 	// exact poisition of ray in grid
+	double				side_dist[2]; 	// dist the ray has to travel from its start position to the first x-unit
+	double				ddist[2];		// distance the ray has to travel to go from 1 x-unit to the next x-unit
+	int 				hit;     		// was there a wall hit?
+	int 				side;    		// was a NS or a EW wall hit?
+	int 				step[2]; 		// what direction to step in x or y-direction (either +1 or -1)
+/*--------------------PROJECTION PREP-------------------*/
+	double				perpwalldist;	//distance projected on camera direction
+	int					line_h;  		//height of vertical line to draw on screen
+	int					draw_start;		//lowest and highest pixel to fill in current stripe line_h
 	int					draw_end;
+/*-----------------------TEXTURING----------------------*/
+	double 				wallx; 			// exact x-value where the wall was hit
 	int					y;
 	int					color;
 	int					move[2];
 	int					moved;
 	int					rotate;
-	double wallx; // exact value where the wall was hit
-	int tex[2];   // x-coordinate of the texture
-	int					texstep;
-	int					texpos;
-	int texnum; // value of the current map square minus 1
+	int 				tex[2];   		// x-coordinate of the texture
+	double				texstep;
+	double				texpos;
+	int 				texnum; 		// value of the current map square minus 1
 	void				*mlx_ptr;
 	void				*win_ptr;
 	t_imgs				*img;
@@ -132,8 +133,7 @@ void					stock_info_bis(char *line, t_data *data);
 int						is_info(char *line);
 void					check_valid_char(t_data *data);
 void					check_is_close(t_data *data);
-void					split_rgb(t_data *data, char *rgb, char who,
-							char **tab);
+void					split_rgb(t_data *data, char *rgb, char who, char **tab);
 int						rgb_to_int(int *rgb);
 void					parse_map(t_data *data);
 void					get_pos(t_data *data);

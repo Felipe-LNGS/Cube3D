@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:58:15 by jfita             #+#    #+#             */
-/*   Updated: 2024/09/17 10:59:58 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:48:06 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	l_rotate(t_data *data)
 	old_planex = data->plane[X];
 	data->dir[X] = data->dir[X] * cos(R_SPEED) - data->dir[Y] * sin(R_SPEED);
 	data->dir[Y] = old_dirx * sin(R_SPEED) + data->dir[Y] * cos(R_SPEED);
-	data->plane[X] = data->plane[X] * cos(R_SPEED) - data->plane[Y] * sin(R_SPEED);
+	data->plane[X] = data->plane[X] * cos(R_SPEED) - data->plane[Y]
+		* sin(R_SPEED);
 	data->plane[Y] = old_planex * sin(R_SPEED) + data->plane[Y] * cos(R_SPEED);
 	return (1);
 }
@@ -35,8 +36,10 @@ int	r_rotate(t_data *data)
 	old_planex = data->plane[X];
 	data->dir[X] = data->dir[X] * cos(-R_SPEED) - data->dir[Y] * sin(-R_SPEED);
 	data->dir[Y] = old_dirx * sin(-R_SPEED) + data->dir[Y] * cos(-R_SPEED);
-	data->plane[X] = data->plane[X] * cos(-R_SPEED) - data->plane[Y] * sin(-R_SPEED);
-	data->plane[Y] = old_planex * sin(-R_SPEED) + data->plane[Y] * cos(-R_SPEED);
+	data->plane[X] = data->plane[X] * cos(-R_SPEED) - data->plane[Y]
+		* sin(-R_SPEED);
+	data->plane[Y] = old_planex * sin(-R_SPEED) + data->plane[Y]
+		* cos(-R_SPEED);
 	return (1);
 }
 

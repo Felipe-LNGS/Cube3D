@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 13:59:41 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:01:46 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,22 @@ void	free_map(t_data *data)
 		free(data->map->f);
 	if (data->map->c)
 		free(data->map->c);
+	free(data->map);
 }
 
-void	free_img(t_imgs *img)
-{
-	if (img->mlx_img)
-		free(img->mlx_img);
-	if (img->addr_ptr)
-		free(img->addr_ptr);
-	if (img->texture)
-	{
-		if (img->texture[NO])
-			free(img->texture[NO]);
-		if (img->texture[SO])
-			free(img->texture[SO]);
-		if (img->texture[WE])
-			free(img->texture[WE]);
-		if (img->texture[EA])
-			free(img->texture[EA]);
-		// free_img(img);
-	}
-}
+// void	free_img(t_imgs *img)
+// {
+// 	// if (img->mlx_img)
+// 	// 	free(img->mlx_img);
+// 	// if (img->addr_ptr)
+// 	// 	free(img->addr_ptr);
+
+// }
 
 void	free_all(t_data *data, t_imgs *img)
 {
-	free_img(img);
+	// free_img(img);
+	(void)img;
 	free_map(data);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
@@ -63,6 +54,18 @@ void	free_all(t_data *data, t_imgs *img)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
+	if (data->img->texture)
+	{
+		if (data->img->texture[NO])
+			free(data->img->texture[NO]);
+		if (data->img->texture[SO])
+			free(data->img->texture[SO]);
+		if (data->img->texture[WE])
+			free(data->img->texture[WE]);
+		if (data->img->texture[EA])
+			free(data->img->texture[EA]);
+	}
+	free(data->img);
 }
 
 void	exit_free(t_data *data, char *str)

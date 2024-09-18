@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 14:00:48 by lmerveil          #+#    #+#             */
-/*   Updated: 2024/09/17 13:49:22 by plangloi         ###   ########.fr       */
+/*   Created: 2024/09/18 09:48:14 by plangloi          #+#    #+#             */
+/*   Updated: 2024/09/18 09:48:18 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,6 @@ int	x_move(t_data *data, char leftorright)
 		x_tmp = data->pos[X] - data->dir[Y] * P_SPEED;
 		y_tmp = data->pos[Y] + data->dir[X] * P_SPEED;
 	}
-	// printf("Position: x[%f] y[%f]\n\n", data->pos[X], data->pos[Y]);
-	// printf("Direction: dir[X]: %f, dir[Y]: %f\n\n", data->dir[X], data->dir[Y]);
-	// printf("Plane: plane[X]: %f, plane[Y]: %f\n", data->plane[X],
-	// 	data->plane[Y]);
 	if (!can_move(data, x_tmp, y_tmp))
 		return (0);
 	else
@@ -87,10 +83,9 @@ int	x_move(t_data *data, char leftorright)
 
 int	moving(t_data *data)
 {
-	int move;
+	int	move;
 
 	move = 0;
-	// printf("move [%d][%d]\n", data->move[X],  data->move[Y]);
 	if (data->move[Y] == 1)
 		move += y_move(data, 'U');
 	if (data->move[Y] == -1)
