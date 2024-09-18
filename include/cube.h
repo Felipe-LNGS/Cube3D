@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 10:52:01 by louismdv          #+#    #+#             */
-/*   Updated: 2024/09/18 11:02:15 by louismdv         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/09/18 12:25:06 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define SCREEN_H 720
 # define SIZE_IMG 64
 # define MERROR "Error : malloc"
-# define P_SPEED 0.05
-# define R_SPEED 0.06
+# define P_SPEED 0.035
+# define R_SPEED 0.04
 
 typedef struct s_color_rgb
 {
@@ -126,7 +126,7 @@ void					check_is_close(t_data *data);
 void					split_rgb(t_data *data, char *rgb,
 							char who, char **tab);
 int						rgb_to_int(int *rgb);
-void					parse_map(t_data *data);
+void					parse_map(t_data *data, char *filename);
 void					get_pos(t_data *data);
 int						open_file(t_data *data, char *filename);
 /*-------------------UTILS-------------------*/

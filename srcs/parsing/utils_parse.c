@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 11:19:58 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:25:22 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	open_file(t_data *data, char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_DIRECTORY);
+	fd = open(filename, __O_DIRECTORY);
 	if (fd > 0)
 	{
 		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
@@ -69,12 +69,11 @@ int	check_format(char *map)
 	int	len;
 
 	len = ft_strlen(map);
-	if (len > 4 && (!ft_strcmp(map + len - 4, ".cub")) == 0)
-	{
-		ft_printf(RED "Error\nThis is not the good format.\n" RESET);
-		exit(0);
-	}
-	return (1);
+	if (map[len - 4] == '.' && map[len - 3] == 'c' && map[len - 2] == 'u'
+		&& map[len - 1] == 'b' && map[len] == '\0')
+		return (0);
+	else
+		return (1);
 }
 
 int	rgb_to_int(int *rgb)
