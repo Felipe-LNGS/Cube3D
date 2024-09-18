@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:47:58 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:24:37 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:14:25 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 	t_imgs	tmp;
 	int		*tab;
 
-	// tmp = ft_calloc()
 	load_xpm(data, &tmp, tex);
 	tab = ft_calloc(1, sizeof(int) * (SIZE_IMG * SIZE_IMG));
 	if (!tab)
@@ -63,8 +62,12 @@ static int	*fill_texture_tab(t_data *data, char *tex)
 	return (tab);
 }
 
+// init xpm textures
 void	init_texture(t_data *data, t_imgs *img)
 {
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		exit_free(data, "MLX error");
 	img->texture = ft_calloc(5, sizeof(int *));
 	if (!img->texture)
 		exit_free(data, MERROR);

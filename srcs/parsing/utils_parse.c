@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 13:31:27 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:00:30 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,38 +83,3 @@ int	rgb_to_int(int *rgb)
 	color = (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 	return (color);
 }
-
-// verifier autour de chaque 0 si il y a autre chose que un 1 c'est carton rouge
-// void	print_map(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (i < data->map->height)
-// 	{
-// 		j = 0;
-// 		while (j < data->map->width)
-// 		{
-// 			ft_printf("%c", data->map->tmp_grid[i][j]);
-// 			// printf(RED"OK"RESET);
-
-// 			j++;
-// 		}
-// 		i++;
-// 		ft_printf("\n");
-// 	}
-
-// }
-// void	free_grid(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < data->map->nb_lines)
-// 	{
-// 		free(data->map->grid[i]);
-// 		i++;
-// 	}
-// 	free(data->map->grid);
-// }

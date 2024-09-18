@@ -1,13 +1,13 @@
 F 0,0,0
 C 0,0,0
 
-NO textures/simonkraft/noir.xpm
-SO textures/simonkraft/noir.xpm
-WE textures/simonkraft/noir.xpm
-EA textures/simonkraft/noir.xpm
+NO textures/matrix.xpm
+SO textures/matrix.xpm
+WE textures/matrix.xpm
+EA textures/matrix.xpm
 
 111111111111111
-1S0000000000101
+1E00000000000101
 1011110111110101
 1000000100000001
 1111111110111011

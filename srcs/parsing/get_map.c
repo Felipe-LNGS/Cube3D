@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:11:30 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:01:35 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	get_height(char *filename, t_data *data)
 	char	*line;
 
 	if (check_format(filename) == 1)
-		exit_free(data, "Error\nNot the good format. Need .cub files ");
+		exit_free(data, "Error\nNot the good format. Need .cub files");
 	fd = open_file(data, filename);
 	line = get_next_line(fd);
 	if (line == NULL)
 	{
 		close(fd);
-		return (exit_free(data, "Error\nTry to read empty map.\n"), 0);
+		return (exit_free(data, "Error\nTry to read empty map."), 0);
 	}
 	while (line)
 	{
@@ -135,33 +135,6 @@ void	rework_map(t_data *data)
 		exit_free(data, "Error\nmissing map");
 	}
 	if (y < 3)
-	{
-		free_split(map);
-		exit_free(data, "Error\nmap too small");
-	}
+		(free_split(map), exit_free(data, "Error\nmap too small"));
 	data->map->tmp_grid = map;
 }
-
-// void	print_tmp_grid(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (data == NULL || data->map == NULL || data->map->tmp_grid == NULL)
-// 	{
-// 		printf("Error: No data to print.\n");
-// 		return ;
-// 	}
-// 	while (i < data->map->height)
-// 	{
-// 		if (data->map->tmp_grid[i] != NULL)
-// 		{
-// 			printf("[%d][%s] \n", i, data->map->tmp_grid[i]);
-// 		}
-// 		else
-// 		{
-// 			printf("Line %d is NULL\n", i);
-// 		}
-// 		i++;
-// 	}
-// }

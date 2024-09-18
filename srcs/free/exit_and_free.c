@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 09:39:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:26:44 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:55:43 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,8 @@ void	free_map(t_data *data)
 	free(data->map);
 }
 
-// void	free_img(t_imgs *img)
-// {
-// 	// if (img->mlx_img)
-// 	// 	free(img->mlx_img);
-// 	// if (img->addr_ptr)
-// 	// 	free(img->addr_ptr);
-
-// }
-
 void	free_all(t_data *data, t_imgs *img)
 {
-	// free_img(img);
 	(void)img;
 	free_map(data);
 	if (data->win_ptr)

@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 13:32:07 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:03:29 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_valid_char(t_data *data)
 		while (x < data->map->width)
 		{
 			if ((ft_strchr(" 01NSEW\n", data->map->tmp_grid[y][x]) == NULL))
-				exit_free(data, "Invalid character need to put only 01NSEW");
+				exit_free(data, "Error\nInvalid char need to put only 01NSEW");
 			if ((ft_strchr("NSEW", data->map->tmp_grid[y][x]) != NULL))
 			{
 				data->pos[X] = (double)x + 0.5;
@@ -38,7 +38,7 @@ void	check_valid_char(t_data *data)
 		y++;
 	}
 	if (nb_start > 1 || nb_start == 0)
-		exit_free(data, "Error: more than one or no start position found.");
+		exit_free(data, "Error\nMore than one or no start position found.");
 }
 
 void	check_is_close(t_data *data)
@@ -58,10 +58,12 @@ void	check_is_close(t_data *data)
 			{
 				if (y == 0 || y == data->map->height - 1 || x == 0
 					|| x == data->map->width - 1)
-					exit_free(data, "Map not closed: character on the edge.");
-				else if ((data->map->tmp_grid[y + 1][x] == ' ') || (data->map->tmp_grid[y - 1][x] == ' ')
-					|| (data->map->tmp_grid[y][x + 1] == ' ') || (data->map->tmp_grid[y][x - 1] == ' '))
-					exit_free(data, "Map not closed: adjacent to empty space");
+					exit_free(data, "Error\nMap not closed: char on the edge.");
+				else if ((data->map->tmp_grid[y + 1][x] == ' ')
+					|| (data->map->tmp_grid[y - 1][x] == ' ')
+					|| (data->map->tmp_grid[y][x + 1] == ' ')
+					|| (data->map->tmp_grid[y][x - 1] == ' '))
+					exit_free(data, "Error\nMap open: adjacent empty space");
 			}
 			x++;
 		}
@@ -103,9 +105,6 @@ void	parse_map(t_data *data, char *filename)
 	get_pos(data);
 	split_rgb(data, data->map->f, 'F', tab);
 	split_rgb(data, data->map->c, 'C', tab);
-	printf("height %d\n",data->map->height);
-	printf("width %d\n",data->map->width);
-
 }
 
 // printf("f path[%d]\n", data->map->f_color);

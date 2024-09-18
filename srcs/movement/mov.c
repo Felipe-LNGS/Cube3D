@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:48:14 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:28:24 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:55:37 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	moving(t_data *data)
 	if (data->move[X] == 1)
 		move += x_move(data, 'R');
 	if (data->rotate > 0)
-		move += l_rotate(data);
+		move += left_rotate(data);
 	if (data->rotate < 0)
-		move += r_rotate(data);
+		move += right_rotate(data);
 	return (move);
 }

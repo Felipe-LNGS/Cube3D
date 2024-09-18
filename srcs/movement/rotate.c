@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mov2.c                                             :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:58:15 by jfita             #+#    #+#             */
-/*   Updated: 2024/09/18 09:48:06 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:52:36 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-int	l_rotate(t_data *data)
+int	left_rotate(t_data *data)
 {
 	double	old_dirx;
 	double	old_planex;
@@ -27,7 +27,7 @@ int	l_rotate(t_data *data)
 	return (1);
 }
 
-int	r_rotate(t_data *data)
+int	right_rotate(t_data *data)
 {
 	double	old_dirx;
 	double	old_planex;

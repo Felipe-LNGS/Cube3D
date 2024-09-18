@@ -6,21 +6,19 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:47:16 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:15:12 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:03:46 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
+// creation: mlx_ptr + window
 void	initiate_mlx(t_data *data)
 {
-	data->mlx_ptr = mlx_init();
-	if (!data->mlx_ptr)
-		exit_free(data, "MLX error");
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREEN_W, SCREEN_H,
 			"RubiksCub3D");
 	if (!data->win_ptr)
-		exit_free(data, "MLX error");
+		exit_free(data, "Error\nMLX winptr");
 }
 
 void	init_struct(t_data *data)

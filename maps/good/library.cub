@@ -1,13 +1,13 @@
 F 0,0,0
 C 0,0,0
 
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO textures/simonkraft/bookshelf_01.xpm
+SO textures/simonkraft/bookshelf_01.xpm
+WE textures/simonkraft/bookshelf_01.xpm
+EA textures/simonkraft/bookshelf_01.xpm
 
         11111111111111111111111111
-        1N1001001001001001001001
+        1S1001001001001001001001
 11111111101110010011111111111111
 10010010000010010000000001
 10010010000010010011000001

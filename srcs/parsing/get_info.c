@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:46 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:23:26 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:01:48 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,8 @@ static int	check_value(char *str)
 			return (1);
 		i++;
 	}
-	if (ft_strlen(str) > 3)
-		return (1);
 	if (ft_atoi(str) > 255)
-		return (1);
+		return (printf("fsd \n"), 1);
 	if (digit_count == 0)
 		return (1);
 	return (0);
@@ -121,7 +119,7 @@ void	split_rgb(t_data *data, char *rgb, char who, char **tab)
 	int	i;
 
 	if (!rgb)
-		exit_free(data, "Missing rgb code");
+		exit_free(data, "Error\nMissing rgb code");
 	tab = ft_split(rgb, ',');
 	if (!tab)
 		exit_free(data, MERROR);
@@ -140,7 +138,7 @@ void	split_rgb(t_data *data, char *rgb, char who, char **tab)
 				data->map->c_color = rgb_to_int(data->map->c_tab);
 		}
 		else
-			(free_split(tab), exit_free(data, "Invalid rgb code"));
+			(free_split(tab), exit_free(data, "Error\nInvalid rgb code"));
 	}
 	free_split(tab);
 }

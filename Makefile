@@ -1,4 +1,4 @@
-NAME        =   cube3D
+NAME        =   cub3D
 
 CC          =   cc
 
@@ -33,10 +33,11 @@ C_FILE		= 	$(addsuffix .c,						\
 				)									\
 				$(addprefix srcs/movement/, 		\
 					mov								\
-					mov2							\
+					rotate							\
 				)									\
 				$(addprefix srcs/raycasting/, 		\
 					raycasting						\
+					raycasting1						\
 				)									\
 				main								\
 				)									\
