@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 10:39:37 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:44:11 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	projection_prep(t_data *data)
 	else
 		data->perpwalldist = (data->side_dist[Y] - data->ddist[Y]);
 	data->line_h = (int)(SCREEN_H / data->perpwalldist);
-	data->draw_start = SCREEN_H / 2 - (data->line_h / 2);
+	data->draw_start = -(data->line_h / 2) + SCREEN_H / 2 ;
 	if (data->draw_start < 0)
 		data->draw_start = 0;
 	data->draw_end = data->line_h / 2 + SCREEN_H / 2;

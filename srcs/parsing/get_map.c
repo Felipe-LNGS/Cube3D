@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:21 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:46:01 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:17:24 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,27 +129,3 @@ void	rework_map(t_data *data)
 	}
 	data->map->tmp_grid = map;
 }
-
-// void	print_tmp_grid(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (data == NULL || data->map == NULL || data->map->tmp_grid == NULL)
-// 	{
-// 		printf("Error: No data to print.\n");
-// 		return ;
-// 	}
-// 	while (i < data->map->height)
-// 	{
-// 		if (data->map->tmp_grid[i] != NULL)
-// 		{
-// 			printf("[%d][%s] \n", i, data->map->tmp_grid[i]);
-// 		}
-// 		else
-// 		{
-// 			printf("Line %d is NULL\n", i);
-// 		}
-// 		i++;
-// 	}
-// }
