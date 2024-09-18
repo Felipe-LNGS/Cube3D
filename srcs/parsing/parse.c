@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:38:29 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 11:03:00 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:24:49 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ void	find_start_line(t_data *data)
 	data->map->start_line = data->map->nb_lines;
 }
 
-void	parse_map(t_data *data)
+void	parse_map(t_data *data, char *filename)
 {
 	char	**tab;
 
 	tab = NULL;
+	get_height(filename, data);
+	read_map(filename, data);
 	find_start_line(data);
 	get_width(data);
 	rework_map(data);

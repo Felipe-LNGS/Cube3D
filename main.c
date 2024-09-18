@@ -52,17 +52,15 @@ int	main(int ac, char **av)
 	else
 	{
 		init_struct(&data);
-		get_height(av[1], &data);
-		read_map(av[1], &data);
-		parse_map(&data);
+		parse_map(&data, av[1]);
 		initiate_mlx(&data);           // creation: mlx_ptr + window
 		init_texture(&data, data.img); // init xpm textures
 		raycast(&data);
 		mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-		mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &data);
+		mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease,
+			&data);
 		mlx_hook(data.win_ptr, DestroyNotify, 0, &on_destroy, &data);
 		mlx_loop_hook(data.mlx_ptr, &displaymoves, &data);
-		
 		mlx_loop(data.mlx_ptr);
 		// print_map(&data);
 		// exit_free(&data, "FIN");

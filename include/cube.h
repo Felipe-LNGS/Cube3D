@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/18 09:27:38 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:25:02 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void					check_valid_char(t_data *data);
 void					check_is_close(t_data *data);
 void					split_rgb(t_data *data, char *rgb, char who, char **tab);
 int						rgb_to_int(int *rgb);
-void					parse_map(t_data *data);
+void					parse_map(t_data *data, char *filename);
 void					get_pos(t_data *data);
 int						open_file(t_data *data, char *filename);
 /*-------------------UTILS-------------------*/
