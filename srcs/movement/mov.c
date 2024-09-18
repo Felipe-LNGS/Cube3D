@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:00:48 by lmerveil          #+#    #+#             */
-/*   Updated: 2024/09/17 12:06:05 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:49:22 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	moving(t_data *data)
 	int move;
 
 	move = 0;
-	printf("move [%d][%d]\n", data->move[X],  data->move[Y]);
+	// printf("move [%d][%d]\n", data->move[X],  data->move[Y]);
 	if (data->move[Y] == 1)
 		move += y_move(data, 'U');
 	if (data->move[Y] == -1)

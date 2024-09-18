@@ -1,8 +1,8 @@
 #include "include/cube.h"
 
-int	on_destroy(t_data *cub)
+int	on_destroy(t_data *data)
 {
-	free_all(cub);
+	free_all(data, data->img);
 	printf("Exit\n");
 	exit(0);
 	return (0);
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 		
 		mlx_loop(data.mlx_ptr);
 		// print_map(&data);
-		exit_free(&data, "FIN");
+		// exit_free(&data, "FIN");
 	}
 	// free_grid(&data);
 	// free(data);

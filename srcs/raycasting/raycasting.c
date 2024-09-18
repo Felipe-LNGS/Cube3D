@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 09:46:03 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:26:12 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,9 @@ void    raycast(t_data *data)
             if (data->y >= 0 && data->y < SCREEN_H)
     			buffer[data->y][x] = data->color;
         }
-		
+			printf("buffer y[%d]\n", data->y);
+			printf("buffer x[%d]\n", x);
+			printf("color[%d]\n", data->color);
 
     x++;
     }

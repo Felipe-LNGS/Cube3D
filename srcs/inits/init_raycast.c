@@ -67,10 +67,10 @@ void	get_pos(t_data *data)
 			{
 				set_dir(data, map[x][y]);
 				set_plane(data, map[x][y]);
-				printf("Direction %c \n",map[x][y] );
-				printf("dir[X]: %f, dir[Y]: %f\n", data->dir[X], data->dir[Y]);
-				printf("plane[X]: %f, plane[Y]: %f\n", data->plane[X],
-					data->plane[Y]);
+				// printf("Direction %c \n",map[x][y] );
+				// printf("dir[X]: %f, dir[Y]: %f\n", data->dir[X], data->dir[Y]);
+				// printf("plane[X]: %f, plane[Y]: %f\n", data->plane[X],
+				// 	data->plane[Y]);
 				return ;
 			}
 			y++;

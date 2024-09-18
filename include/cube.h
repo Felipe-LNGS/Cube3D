@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:24:37 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 10:47:12 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:58:00 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int						open_file(t_data *data, char *filename);
 /*-------------------UTILS-------------------*/
 char					*ft_strducube(char *s, t_data *data);
 /*--------------------FREE--------------------*/
-void					free_all(t_data *data);
+void					free_all(t_data *data, t_imgs *img);
 void					exit_free(t_data *data, char *str);
 /*--------------------MLX--------------------*/
 void					initiate_mlx(t_data *data);
