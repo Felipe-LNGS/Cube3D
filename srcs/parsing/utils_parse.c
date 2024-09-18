@@ -6,7 +6,7 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:21:33 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:25:22 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:25:41 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	open_file(t_data *data, char *filename)
 {
 	int	fd;
 
-	fd = open(filename, __O_DIRECTORY);
+	fd = open(filename, O_DIRECTORY);
 	if (fd > 0)
 	{
 		return (close(fd), exit_free(data, "Error\nTry to read empty map."), 1);
