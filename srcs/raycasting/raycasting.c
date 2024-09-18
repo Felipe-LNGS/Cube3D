@@ -6,13 +6,13 @@
 /*   By: louismdv <louismdv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/17 19:19:07 by louismdv         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:27:25 by louismdv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube.h"
 
-static  void reset_buffer(int **buffer)
+static void reset_buffer(int **buffer)
 {
     int j;
 
@@ -22,7 +22,7 @@ static  void reset_buffer(int **buffer)
     free(buffer);
 }
 
-static void	ft_img_addr(t_data *data, int **buffer)
+static void ft_img_addr(t_data *data, int **buffer)
 {
     int     i;
 	int		j;
