@@ -6,7 +6,7 @@
 /*   By: plangloi <plangloi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:19:15 by plangloi          #+#    #+#             */
-/*   Updated: 2024/09/18 12:18:25 by plangloi         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:24:58 by plangloi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,8 @@ void	dda(t_data *data)
 			data->map_p[Y] += data->step[Y];
 			data->side = Y;
 		}
-		// printf("data->map->width %d\n", data->map->width);
-		// printf("data->map->height %d\n", data->map->width);
+		printf("data->map->width %d\n", data->map->width);
+		printf("data->map->height %d\n", data->map->height);
 		
 		if (data->map_p[X] < 0 || data->map_p[Y] < 0
 			|| data->map_p[X] >= data->map->width
